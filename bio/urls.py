@@ -1,11 +1,12 @@
-# from . import views
-# from django.urls import path
+from . import views
+from django.urls import path
 
 
-# app_name = 'bio'
-# urlpatterns = [
+app_name = 'bio'
+urlpatterns = [
     
-#     path('', views.home, name='home'),
+    path('category/<str:slug>', views.view_cat, name='view_cat'),
+    path('service/<str:slug>', views.service_details, name='service_details'),
     
     
-# ]
+]

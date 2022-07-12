@@ -48,7 +48,10 @@
 
         <div class="row justify-content-center">
 
+           
+
             {% for skill in me_data.get_skills %}
+            
             <div class="col-xxl-4">
                 <div class="card">
                     <h4 class="mt-5 mb-2 text-center">{{skill.cat_of_skill}}</h4>
@@ -59,10 +62,10 @@
                  
 
                     <ul class="list-unstyled mb-0">
-                        {% for name, link in skill.skill_in|skills_filter %}
-                        <li><a target="_blank" class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{link}}">
+                        {% for sin in skill.skills_in.all %}
+                        <li><a target="_blank" class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{sin.link}}">
                                 <span class="d-inline-block bg-success rounded-circle p-1"></span>
-                                {{name}}
+                                {{sin.name}}
                             </a></li>
 
                         {% endfor %}
