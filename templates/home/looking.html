@@ -1,0 +1,303 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}{{site.slogan}}'s select {% endblock %}
+{% block content %}
+<div class="bg-info p-4">
+    <div class="container py-5">
+        <div class="row d-flex">
+            <div class="col-xxl-3">
+                <img src="{{me_data.photo.url}}" class="rounded float-start img-fluid" alt="{{me_data.title}}">
+            </div>
+            <div class="col-xxl-9">
+                <p class="fs-4">Hi, My Name is</p>
+                <h1 class="display-5 fw-bold">{{me_data.title}}</h1>
+                <p class="fs-4">{{me_data.summary}}</p>
+
+                {% for link in me_data.get_links %}
+                <a class="btn btn-outline-primary mb-1 btn-md" href="{{link.links}}"><span
+                        class="me-2">{{link.icon|safe}}</span>{{link.text_to_show}}</a> {% endfor %}
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-2 text-center">
+
+    <h3 class="display-5">Centered hero</h3>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
+            popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
+            extensive prebuilt components, and powerful JavaScript plugins.</p>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="bg-light p-4">
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            {% for skill in me_data.get_skills %}
+            <div class="col-xxl-4">
+                <div class="card">
+                    <h4 class="mt-5 mb-2 text-center">{{skill.cat_of_skill}}</h4>
+                    <div class="position-absolute top-0 start-50 translate-middle">
+                        <img src="{{site.favicon}}" class="img-fluid rounded-circle" alt="Cinque Terre">
+                    </div>
+
+                 
+
+                    <ul class="list-unstyled mb-0">
+                        {% for name, link in skill.skill_in|skills_filter %}
+                        <li><a target="_blank" class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{link}}">
+                                <span class="d-inline-block bg-success rounded-circle p-1"></span>
+                                {{name}}
+                            </a></li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="bg-warning p-4">
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="border-bottom mb-5">
+                <h2 class="pb-2 border-bottom border-3 border-primary text-danger">What Solutions We Provide</h2>
+                <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-hourglass fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Unlimited Urls</h3>
+                            <p>Create an unlimited number of short URLs from any long URL. It's also completely free.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-keyboard fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Up to 2000 characters</h3>
+                            <p>Convert any lengthy URL with less than 2000 characters to a short URL in seconds. The
+                                word "short" denotes "to shorten." And it's simple to remember.</p>
+                        </div>
+                    </div>
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-user-secret fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Secure URL</h3>
+                            <p>Our service has HTTPS protocol and data encryption. It is fast and secure.</p>
+                        </div>
+                    </div>
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-microchip fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Statistics</h3>
+                            <p>Through the Statistics option, you may get a list of how many URLs you've created in the
+                                past. A visitor log will be generated for each Shorten URL.</p>
+                        </div>
+                    </div>
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-recycle fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Reliability</h3>
+                            <p>When we receive a report that our URLs are being used illegally, we invalidate them. Any
+                                other abbreviated version of the same URL is also prohibited. No one will ever be able
+                                to make it any shorter. More illicit creators will face disciplinary action.</p>
+                        </div>
+                    </div>
+
+                    <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <i class="fa fa-university fa-2x text-danger"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">Authenticity</h3>
+                            <p>Registered user-created URLs are immediately redirected, and anonymously generated URLs
+                                are redirected after 5 seconds. We believe that by doing so, everyone will be able to
+                                construct their own URL.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="bg-secondary p-4">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-6">
+                    <div class="col-12 text-center">
+                        <h2 class="h1 px-lg-5">Awesome Features</h2>
+                        <p class="lead px-lg-8">You get all Bootstrap components fully customized. Besides, you receive
+                            numerous plugins out of the box and ready to use.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-bootstrap"></span></span>
+                                <h5 class="fw-bold text-primary">Bootstrap 5</h5>
+                                <p>Built with the most popular CSS Framework</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-sass"></span></span>
+                                <h5 class="fw-bold text-primary">Sass</h5>
+                                <p>Variables and mixins to empower development</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fas fa-mobile-alt"></span></span>
+                                <h5 class="fw-bold text-primary">Responsive</h5>
+                                <p>All pages and components are 100% responsive</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-gulp"></span></span>
+                                <h5 class="fw-bold text-primary">Gulp</h5>
+                                <p>Gulp &amp; BrowserSync for a flawless workflow</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="far fa-images"></span></span>
+                                <h5 class="fw-bold text-primary">Creative rights</h5>
+                                <p>All images, icons and fonts are licensed &amp; free to use</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="far fa-file-alt"></span></span>
+                                <h5 class="fw-bold text-primary">Documentation</h5>
+                                <p>Everything that comes with Rocket is well documented</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-accessible-icon"></span></span>
+                                <h5 class="fw-bold text-primary">WCAG Accessibility</h5>
+                                <p>Accessibility oriented design and functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-html5"></span></span>
+                                <h5 class="fw-bold text-primary">W3C Validated</h5>
+                                <p>HTML pages are all valid by W3C Standards</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fab fa-js-square"></span></span>
+                                <h5 class="fw-bold text-primary">Vanilla JS</h5>
+                                <p>jQuery is not a required dependency for Volt</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="far fa-calendar-alt"></span></span>
+                                <h5 class="fw-bold text-primary">Calendar</h5>
+                                <p>Advanced integration with FullCalendar.js</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fas fa-map-marked-alt"></span></span>
+                                <h5 class="fw-bold text-primary">MapBox</h5>
+                                <p>Custom integration with markers and cards</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <span class="icon icon-lg mb-4"><span class="fas fa-pen-fancy"></span></span>
+                                <h5 class="fw-bold text-primary">Design</h5>
+                                <p>Crafted by professional UI/UX designers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
