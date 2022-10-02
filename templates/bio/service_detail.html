@@ -1,0 +1,188 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}{{site.slogan}}'s select {% endblock %}
+{% block content %}
+
+{% include "layouts/tophero.html" %}
+
+
+
+<div class="g-5">
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mt-4">
+                <h2 class="pb-4 mb-4 fst-italic border-bottom blog-post-title text-darkbeige fw-bold border-2 border-danger">
+                    {{service.name}}
+                </h2>
+                <div id="servicegalery" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        {% for image in service.get_images %}
+                        <button type="button" data-bs-target="#servicegalery" data-bs-slide-to="{{forloop.counter0}}"
+                            class="{% if forloop.first %}active{% endif %}" aria-current="true"
+                            aria-label="{{image.title}}"></button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner">
+                        {% for image in service.get_images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{image.picture.url}}" class="img-fluid" alt="{{image.alt}}">
+                            <div class="container ">
+                                <div class="carousel-caption text-start bg-dark rounded p-3" style="opacity: 0.75;">
+                                    <h1>{{image.title}}</h1>
+                                    <p>{{image.description|safe}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicegalery"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicegalery"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <article class="blog-post mt-4">
+                    <h3 class="blog-post-title text-darkbeige fw-bold border-bottom border-2 border-danger">Details:</h3>
+                    <div class="border-bottom">
+                        {{service.description|safe}}
+                    </div>
+                    <div class="mt-4 border-bottom">
+                        <h4 class="text-darkbeige fw-bold border-bottom border-2 border-danger">The all or any one of below are invloved in this service</h4>
+                        <ul class="list-unstyled mb-0">
+                            {% for involveskill in service.skills_involved.all %}  
+                            {% for myskills in involveskill.service_details_skills_in %}
+                           
+                            <li class="mb-2 fs-6">
+                                <svg class="me-2 text-danger" width="1.25rem" height="1.25rem" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg>
+                                {{myskills.name}}
+                            </li>
+                            
+                            {% endfor %}
+                            {% endfor %}
+                            
+
+                            
+                            
+
+
+                        </ul>
+                    </div>
+                    
+
+                    <div id="compare-packages" class="mt-4 border-bottom" >
+                        <h3  class="mt-4 text-darkbeige fw-bold border-bottom border-2 border-danger">Compare Packages</h3>
+                        <table class="table table-striped table-responsive">
+                            {% for data, values in com_data.items %}
+                            <tr>
+                                <td class="fw-bold">{{data}}</td>
+                                {% for v in values %}
+                                <td>{{v}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="position-sticky" style="top: 4rem;">
+                    <div class="p-4 mb-3 mt-2 bg-dark rounded text-center text-light">
+                        <h4 class="fst-italic border-bottom border-2 border-danger">Curious!</h4>
+                        <p class="mb-2">Click the button below to get in touch with me. The button will establish a
+                            WhatsApp connection.</p>
+                        <a class="btn btn-danger" target="_blank"
+                            href="https://api.whatsapp.com/send?phone={{site.phone}}&text= Hi Haradhan, I want to talk about your service '{{service.name}}'">Whatsapp
+                            Inquery About The Service</a>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm bg-light">
+
+                            <div class="card-body serviceoption">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h5 class="card-title text-darkbeige">Service Options</h5>
+                                <a class="card-title h6 text-end link-danger" href="#compare-packages">Compare Options</a>
+
+                                </div>
+                                
+                                <ul class="nav nav-pills nav-fill" id="myservice" role="tablist">
+                                    {% for myservice in service.myservice.all %}
+                                    <li class="nav-item " role="presentation">
+                                        <button class="nav-link link-darkbeige  {% if forloop.first %} active {% endif %}"
+                                            id="myservice{{myservice.id}}" data-bs-toggle="tab"
+                                            data-bs-target="#myservice{{myservice.id}}-tab" type="button" role="tab"
+                                            aria-controls="myservice{{myservice.id}}-tab"
+                                            aria-selected="true">{{myservice.title}}</button>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="tab-content" id="myserviceContent">
+                                    {% for myservice in service.myservice.all %}
+                                    <div class="mt-5 tab-pane fade {% if forloop.first %} show active {% endif %} "
+                                        id="myservice{{myservice.id}}-tab" role="tabpanel"
+                                        aria-labelledby="myservice{{myservice.id}}">
+                                       
+                                        <p class="border-bottom"><b>Price: </b>${{myservice.price}}</p>
+                                        <p class="border-bottom"><b>Delivery Time: </b>Within {{myservice.delivery_time}} days</p>
+                                        <p class="border-bottom"><b>Revision: </b>{{myservice.revision}}</p>
+                                        <p class="border-bottom"><b>Description: </b>{{myservice.description}}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="list-inline-item mb-2">
+                                        {% for cat in service.category.all %}
+                                        <a class="badge bg-darkbeige badge-pill text-decoration-none link-light"
+                                            href="{% url 'bio:view_cat' request.session.looking_for cat.slug %}">#{{cat.name}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group">
+                                        {% for mpl, link in service.mp_links|skills_filter %}
+                                        <a target="_blank" class="btn btn-sm btn-outline-danger" href="{{link}}">Buy
+                                            at {{mpl|upper}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Inform your audience about this service:</h4>
+                        <div class="addthis_inline_share_toolbox_spsh mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4d95fcae2a2f4222"></script>
+<script type="text/javascript">
+
+    var addthis_share = {
+        url: "{{request.build_absolute_uri}}",
+        title: "The service named '{{service.name}}' might be helpful to you which was discovered at ",
+    }
+    var addthis_config = {
+        data_track_clickback: false,
+        data_track_addressbar: false,
+    } 
+</script>
+
+{% endblock javascripts %}

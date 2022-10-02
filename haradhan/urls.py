@@ -20,6 +20,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('taggit_autosuggest/', include('taggit_autosuggest.urls')),
     path('', include('home.urls')),
     path('', include('common.urls')), 
+    path('', include('bio.urls')), 
+    path('', include('sense.urls')), 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

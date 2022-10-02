@@ -2,12 +2,12 @@
 from django.http import HttpResponseRedirect
 from django.urls import resolve, reverse
 from django.contrib import messages
+from common.common_processor import looking_list
 
 
 def looking_for_required(function):    
-    def wrap(request, *args, **kwargs):    
-        print(kwargs)    
-        if request.session['looking_for'] == None:     
+    def wrap(request, *args, **kwargs):       
+        if request.session['looking_for'] not in looking_list():     
             messages.warning(request,'Please Select Looking for')       
             return HttpResponseRedirect(reverse('home:home'))            
         else:
@@ -17,7 +17,7 @@ def looking_for_required(function):
     wrap.__name__ = function.__name__                
     return wrap
 
-def no_looking_required(function):    
+def no_looking_required(function):     
     def wrap(request, *args, **kwargs):       
         next = request.META.get('HTTP_REFERER', None) 
         
@@ -26,7 +26,7 @@ def no_looking_required(function):
         else:
             redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])})) 
             
-        if request.session['looking_for'] == None:            
+        if request.session['looking_for'] not in looking_list():            
             return function(request, *args, **kwargs)         
         else:
             return redirect            

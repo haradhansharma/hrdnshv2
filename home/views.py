@@ -4,13 +4,13 @@ from django.urls import reverse
 from .forms import *
 from bio.helper import get_me_data
 from .decorators import looking_for_required, no_looking_required
+from common.common_processor import site_info, common_process
+
 
 
 
 @no_looking_required
-def home(request):   
-    print('from home______________________')
-    print(request.session.items())  
+def home(request):       
     form = LookingForm()  
     if request.method == 'POST':
         form = LookingForm(request.POST)  
@@ -30,13 +30,15 @@ def home(request):
     return render(request, 'home/index.html', context = context)
 
 @looking_for_required
-def looking(request, **kwargs):
-    
-    me_data = get_me_data(request)
-    
+def looking(request, **kwargs): 
+    try:   
+        me_data = get_me_data(request)  
+    except:
+        me_data = None
     
     context = {
-        'me_data': me_data      
+        'me_data': me_data,
+        'alter' : reverse('home:looking', args=[str(common_process(request).get('alternat_looking'))]) 
     }
     return render(request, 'home/looking.html', context = context)
 

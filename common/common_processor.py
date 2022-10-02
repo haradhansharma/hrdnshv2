@@ -1,8 +1,14 @@
 from django.conf import settings
 
+def looking_list():
+    look_list = list((dict(settings.LOOKING)).keys())
+    while("" in look_list) :
+        look_list.remove("")    
+    return look_list
+
 
 def site_info():
-    from common.models import ExSite   
+    from common.models import ExSite  
        
     site = ExSite.on_site.get()   
     site_info = {
@@ -20,23 +26,37 @@ def site_info():
         'phone': site.phone,
         'email': site.email,
         'location': site.location,
-        'facebook_link': site.facebook_link,
-        'twitter_link': site.twitter_link, 
-        'linkedin_link': site.linkedin_link,    
+        'facebook': site.facebook,
+        'twitter': site.twitter, 
+        'linkedin': site.linkedin,     
+        'github': site.github,   
            
     } 
     
     return site_info
 
+def header_menu(request):
+    from django.urls import reverse   
     
+    
+    
+    menu_items = {}     
+    item = {
+        'Resume': reverse('bio:cv', kwargs={'looking':request.session['looking_for']}),
+        'Senses': reverse('sense:sense_list'),
+    }
+    menu_items.update(item)
+    
+    return menu_items   
     
 
 
 def common_process(request):
+    
     lookings = dict(settings.LOOKING)
     looking = request.session['looking_for']
     alternat_looking = [l for l in lookings if l != looking and l != ''][0] 
-     
+    segments = list(filter(None, request.path.split('/')))  
     
     
     text = {
@@ -45,6 +65,9 @@ def common_process(request):
     return {   
             'site': site_info(),
             'text': text, 
-            'alternat_looking' : alternat_looking,            
+            'alternat_looking' : alternat_looking,   
+            'header_menu' : header_menu(request),
+            'segments' : segments,
+                   
     }
     

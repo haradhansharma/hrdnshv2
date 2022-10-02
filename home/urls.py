@@ -7,7 +7,8 @@ app_name = 'home'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('<str:looking>', views.looking, name='looking'),
+    path('at/<str:looking>/', views.looking, name='looking'),
+    path('elsifightbuilder/', TemplateView.as_view(template_name="home/elsifight.html"), name='elsifightbuilder'),
     
     
 ]

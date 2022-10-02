@@ -1,0 +1,150 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}{{site.slogan}}'s select {% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <div class="mb-4">
+                    / {% for tag in tags %}
+                    <a href="{% url 'sense:sense_tag' tag.slug %}"
+                        class="link-secondary text-decoration-none">
+                        {{tag.name|upper}}
+                    </a> /
+                    {% endfor %}
+                </div>
+                <div class="d-block mb-4" style="position: relative;">
+                    <h2 class="card-title h5 st-font-size d-block">
+                        <a class="link-danger text-decoration-none" href="{{ post.get_absolute_url }}">
+                            {{ post.title|upper }}
+                        </a>
+
+                    </h2>
+                    <div class="sense-font-image d-none d-md-block">{{ post.title.0 }}</div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-muted">
+                        Published on {{ post.publish.date }} by <strong>{{ post.author.username  }}</strong>
+                        
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="pt-0">
+    <div class="container mt-n7 mt-n8 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5">
+                <div class="col-md-9 mx-auto">
+                    <div style="position: relative;">
+                    <div class="sense-font-image d-none d-md-block">{{ post.title.0 }}</div>
+                </div>
+                <div class="mb-4 text-end border-bottom">
+                    TAGGED: 
+                    / {% for tag in post.tags.all %}
+                    <a href="{% url 'sense:sense_tag' tag.slug %}"
+                        class="link-secondary text-decoration-none">
+                        {{tag.name|upper}}
+                    </a> /
+                    {% endfor %}
+                </div>
+                    <div class="card border-0   pb-8">   
+                        <div class="card-body p-0">                            
+                            <div class="card-text my-4 " style="font-size: 1.6rem; position:relative;">{{ post.body|safe}}</div>
+                            <div class="text-center pt-5">
+                                <div class="my-3">
+                                    <h3>Share Sense To:</h3>
+                                </div>
+                                <div class="addthis_inline_share_toolbox_spsh mt-2"></div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div
+                    class="col-12 d-block d-sm-flex justify-content-between p-2">
+                    <div>
+                        {% if post.get_previous_by_publish %}
+                        <div class="previous">
+                            <a class="d-block" href="{% url 'sense:sense_detail' post.get_previous_by_publish.slug %}">&larr; Previous
+                                Posts</a>
+                            <a class="d-block" href="{% url 'sense:sense_detail' post.get_previous_by_publish.slug %}">{{post.get_previous_by_publish.title}}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if post.get_next_by_publish %}
+                        <div class="next">
+                            <a class="d-block" href="{% url 'sense:sense_detail' post.get_next_by_publish.slug %}">Next Posts &rarr;</a>
+                            <a class="d-block" href="{% url 'sense:sense_detail' post.get_next_by_publish.slug %}">{{post.get_next_by_publish.title}}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card shadow col-12 p-5 mt-5">
+                <div class="card-header mb-5">
+                    <h3>Similar Senses</h3>
+                </div>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for sense in similar_senses %}
+                    <div class="col d-flex">
+                        <div class="card bg-lgreen shadow-sm flex-fill overflow-hidden">
+                            {% if  sense.image %}
+                            <img src="{{blog.image.url}}" class="img-fluid" alt="{{sense.title}}">
+                            {% else %}
+                            {% endif %}
+                            <div class="card-title px-2 mb-0 border-bottom py-2">
+                                {{sense.title|upper}}
+                                <div class="sense-font-image d-none d-md-block" style="left: -0.5rem;">{{ sense.title.0 }}</div>
+                            </div>
+                            <div class="card-body pt-0">
+                                {{sense.body|safe|truncatechars:150}}
+                                <div class="d-sm-flex d-block justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-primary" href="{{sense.get_absolute_url}}">Read On</a>
+                                    </div>
+                                    <div class="text-muted">{{sense.view}} views</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4d95fcae2a2f4222"></script>
+<script type="text/javascript">
+
+    var addthis_share = {
+        url: "{{request.build_absolute_uri}}",
+        title: "{{post.title}} ",
+    }
+    var addthis_config = {
+        data_track_clickback: false,
+        data_track_addressbar: false,
+    } 
+</script>
+
+
+
+{% endblock javascripts %}

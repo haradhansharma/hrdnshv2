@@ -1,0 +1,135 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}{{site.slogan}}'s select {% endblock %}
+{% block content %}
+
+{% include "layouts/tophero.html" %}
+
+
+<div class="g-5">
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mt-4">
+                <h2 class="pb-4 mb-4 fst-italic border-bottom blog-post-title">
+                    {{service.title}}
+                </h2>
+                <div id="servicegalery" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        {% for image in service.get_images %}
+                        <button type="button" data-bs-target="#servicegalery" data-bs-slide-to="{{forloop.counter0}}"
+                            class="{% if forloop.first %}active{% endif %}" aria-current="true"
+                            aria-label="{{image.title}}"></button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner">
+                        {% for image in service.get_images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{image.picture.url}}" class="img-fluid" alt="{{image.alt}}">
+                            <div class="container">
+                                <div class="carousel-caption text-start">
+                                    <h1>{{image.title}}</h1>
+                                    <p>{{image.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicegalery"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicegalery"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <article class="blog-post mt-4">
+                    <h2 class="blog-post-title">Details:</h2>
+                    <div class="border-bottom">
+                        {{service.description|safe}}
+                    </div>
+                                 
+
+                    
+                </article>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="position-sticky" style="top: 4rem;">
+                    <div class="p-4 mb-3 bg-light rounded text-center">
+                        <h4 class="fst-italic">Thank You!</h4>
+                        <p class="mb-3">I appreciate your curiosity about my work. Please click the button below if you're looking for something similar.</p>
+                        <a class="btn btn-success" target="_blank"
+                            href="https://api.whatsapp.com/send?phone={{site.phone}}&text= Hi Haradhan, If possible, I'd like to provide you a job that is similar to this '{{service.name}}'. I hope you have some time. ">Express interest via WhatsApp </a>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+
+                            <div class="card-body">
+                                
+
+                                <div class="mt-4 border-bottom">
+                                    <h3>The all or any one of below are invloved in this wrok</h3>
+                                    <ul>
+                                    {% for involveskill in service.skills_involved.all %}  
+                                    {% for myskills in involveskill.works_details_skills_in %}
+                                                          
+                                    <span class="badge bg-secondary">{{myskills}}</span>
+                                                        
+                                    {% endfor %}
+                                    {% endfor %}
+
+                                    
+                                    </ul>                      
+                                </div> 
+                                
+                               
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group">
+                                        {% for cat in service.category.all %}
+                                        <a class="btn btn-sm"
+                                            href="{% url 'bio:view_cat' request.session.looking_for cat.slug %}">#{{cat.name}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Inform your audience about this my work:</h4>
+                        <div class="addthis_inline_share_toolbox_spsh mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4d95fcae2a2f4222"></script>
+<script type="text/javascript">
+
+    var addthis_share = {
+        url: "{{request.build_absolute_uri}}",
+        title: "A nice work named '{{service.title}}' found at ",
+    }
+    var addthis_config = {
+        data_track_clickback: false,
+        data_track_addressbar: false,
+    } 
+</script>
+
+{% endblock javascripts %}

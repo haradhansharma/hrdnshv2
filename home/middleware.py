@@ -25,17 +25,11 @@ class HomeMiddleware:
         
         """
         
+      
         if 'looking_for' not in request.session:
             request.session['looking_for'] = None
             
-        # looking_for_session = request.session['looking_for']    
-        # print(request.session.items())         
-               
-        # if looking_for_session == None :
-        #     if request.path != '/' and 'admin' not in resolve(request.path).namespaces:
-        #         return  HttpResponseRedirect(reverse('home:home'))            
-        # else:
-        #     pass
+
         
         
         
