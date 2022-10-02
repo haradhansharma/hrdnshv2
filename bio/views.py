@@ -198,7 +198,7 @@ def cvpdf(request, **kwargs):
         if platform.system() == 'Windows':
             wkhtmltopdf_bin = 'C:\\Program Files (x86)\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
         elif platform.system() == 'Linux':
-            wkhtmltopdf_bin = 'C:\\Program Files (x86)\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
+            wkhtmltopdf_bin = '/usr/local/bin/wkhtmltopdf'
         else:
             messages.warning(request,f'OS Unknow! Please drop a mail to {site_email}')    
             return  HttpResponseRedirect(reverse('home:home'))
