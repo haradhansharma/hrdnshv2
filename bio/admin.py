@@ -21,6 +21,7 @@ class ExtraLabelAdmin(admin.ModelAdmin):
 admin.site.register(ExtraLabel, ExtraLabelAdmin)
 admin.site.register(Languge)
 admin.site.register(Interest)
+admin.site.register(Certificate)
 class EducationAdmin(admin.ModelAdmin):
     list_display = ('title', 'me', 'school', 'period',)
     list_filter = ('me',)

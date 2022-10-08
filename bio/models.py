@@ -65,6 +65,10 @@ class Me(models.Model):
     @property
     def work_experience(self):
         return self.workexperience.filter(active = True).order_by('serial')
+    
+    @property
+    def get_certificate(self):
+        return self.certificate.all()
 
     
     def __str__(self) -> str:
@@ -73,6 +77,16 @@ class Me(models.Model):
     objects = models.Manager()
     webobjects = WebManager()
     fashionobjects = FashionManager()
+    
+class Certificate(models.Model):
+    me = models.ForeignKey(Me, on_delete=models.CASCADE, related_name='certificate')
+    name = models.CharField(max_length=252)
+    digital_pic = models.ImageField(upload_to='certificate')
+    valid_link = models.URLField()
+    
+    def __str__(self):
+        return self.name
+    
     
 class Languge(models.Model):    
     name = models.CharField(max_length=252)

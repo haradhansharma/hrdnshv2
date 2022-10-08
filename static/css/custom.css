@@ -5,7 +5,61 @@ body {
   font-family: 'Baloo Bhaijaan 2', cursive;
   font-family: 'Gantari', sans-serif;
 }
+body::before {
+  content: "";
+  position: fixed;
+  background: #892d2c url("../bg.jpg") top right no-repeat;
+  background-size: cover;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: -1;
+}
+.o-0 { opacity: 0; }
+.o-25 { opacity: .25; }
+.o-50 { opacity: .5; }
+.o-75 { opacity: .75; }
+.o-90 { opacity: .90; }
+.o-95 { opacity: .95; }
+.o-100 { opacity: 1; }
 
+.top-60 {
+  top: 60%!important;
+}
+.top-30 {
+  top: 30%!important;
+}
+.top-25 {
+  top: 25%!important;
+}
+.top-20 {
+  top: 20%!important;
+}
+.top-15 {
+  top: 15%!important;
+}
+.top-10 {
+  top: 10%!important;
+}
+.top-5 {
+  top: 5%!important;
+}
+.bottom-25 {
+  bottom: 25%!important;
+}
+.bottom-20 {
+  bottom: 20%!important;
+}
+.bottom-15 {
+  bottom: 15%!important;
+}
+.bottom-10 {
+  bottom: 10%!important;
+}
+.bottom-5 {
+  bottom: 5%!important;
+}
 .bg-myred {
   background-color: #ED2024!important;
 }

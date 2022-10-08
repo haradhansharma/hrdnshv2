@@ -4,12 +4,29 @@
 {% block title %}{{site.slogan}}'s Profile Setting{% endblock %}
 
 {% block content %}
-{% include "layouts/ads_display.html" %}
-<!--
-{{site.slogan}}
-{{site.description}}
--->
 
+<div class="position-absolute top-30 start-0">
+    <h2 class="text-end"> <span class="badge bg-darkbeige">
+       Professional Service Provider
+
+    </span>
+</h2>
+
+</div>
+
+<div class="position-absolute bottom-25 end-0">
+    <h2 class="text-end"> <span class="badge bg-danger">
+        Web Developper(Python, Opencart)
+
+    </span>
+</h2>
+<h2 class="text-end">
+    <span class="badge bg-brightbeige">
+        Fashion Technologist
+
+    </span>
+</h2>
+</div>
 
 {% if messages %}
 <div class="col-12 text-center">
@@ -37,13 +54,15 @@
             {% csrf_token %}
             <div class="form-check d-flex">
                 {{ form.looking_for }}
-                <input class="btn btn-primary py-3 ms-2" form="looking_form" type="submit" value="GO">
+                <input class="btn btn-danger py-3 ms-2" form="looking_form" type="submit" value="GO">
             </div>
         </form>
     </div>
 </div>
 
-{% include "layouts/ads_display.html" %}
+
+
 
 
 {% endblock content %}
+

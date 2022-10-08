@@ -6,8 +6,45 @@
 {% block content %}
 
 {% include "layouts/tophero.html" %}
-<div class="bg-light p-4">
+<div class="bg-light p-4 o-95">
     <div class="container py-5 pt-3">
+        {% if me_data.get_certificate %}
+        <div class="row justify-content-center mb-5">
+            <div class=" text-center mb-2">
+                <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">Certificates</h3>
+                
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                {% for certificate in me_data.get_certificate %}
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                        <div class="text-center p-3">
+                            <div class="card-container d-block justify-content-center align-items-center col w-100">
+                                <div class="img-card-container img-fluid h-100">
+                                    
+                                    <a class="text-decoration-none "
+                                        href="{{ certificate.valid_link }}" target="_blank">
+                                        <img class="img-fluid h-100" src="{{certificate.digital_pic.url}}"
+                                            alt="{{certificate.name}}">
+                                    </a>
+                                   
+                                </div>
+                                <div class="card-info">
+                                    <a class="text-decoration-none "
+                                        href="{{ certificate.valid_link }}" target="_blank">
+                                        <h5 class="fw-bold text-primary">{{certificate.name}}</h5>
+                                        <span>Click to verify the certificate online!</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
         <div class="row justify-content-center">
             <div class=" text-center mb-5">
                 <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">Overview of skills
@@ -57,7 +94,7 @@
     </div>
 </div>
 
-<div class="album py-5 bg-grey">
+<div class="py-5 bg-silver o-95">
     <div class="container">
         <div class="mt-2 text-center">
             <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">The solutions I provide
@@ -135,7 +172,7 @@
         </div>
     </div>
 </div>
-<div class="bg-secondary p-4">
+<div class="bg-secondary p-4 o-95">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="container">
@@ -179,18 +216,5 @@
     </div>
 </div>
 
-<a href="https://www.testdome.com/certificates/de5b92b6654f4e05a153ed76045c5499" class="testdome-certificate-stamp silver">
-    <span class="testdome-certificate-name">Haradhan Sharma</span>
-    <span class="testdome-certificate-test-name">Python and Django</span>
-    <span class="testdome-certificate-card-logo">TestDome<br>Certificate</span>
-</a>
-<script>
-    var stylesheet = "https://www.testdome.com/content/source/stylesheets/embed.css",
-    link = document.createElement("link");
-    link.href = stylesheet,
-    link.type = "text/css",
-    link.rel = "stylesheet",
-    link.media = "screen,print",
-    document.getElementsByTagName("head")[0].appendChild(link);
-</script>
+
 {% endblock content %}
