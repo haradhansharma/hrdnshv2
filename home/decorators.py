@@ -8,7 +8,7 @@ from common.common_processor import looking_list
 def looking_for_required(function):    
     def wrap(request, *args, **kwargs):       
         if request.session['looking_for'] not in looking_list():     
-            messages.warning(request,'Please Select Looking for')       
+            messages.warning(request,'Choose the area in which you need help from the box below!')       
             return HttpResponseRedirect(reverse('home:home'))            
         else:
             request.session['looking_for'] = kwargs['looking']

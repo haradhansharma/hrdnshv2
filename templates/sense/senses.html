@@ -47,11 +47,12 @@
                     </nav>
                     <form method="get" action="" class="row g-1 justify-content-center align-items-center text-center mt-2">       
                         <div class="input-group mb-3">
-                            <input type="text" name="q" class="form-control" value="" aria-label="Search senses..." placeholder="Search senses..." aria-describedby="button-q">
+                            <input type="text" name="q" class="form-control" value="{{request.session.q}}" aria-label="Search senses..." placeholder="Search senses..." aria-describedby="button-q">
                             <button type="submit" id="button-q" class="btn btn-secondary">Search</button>
                         </div>            
                     </form> 
                 </div>
+                {% if posts %}
                 <div class="col-md-8 col-lg-9 mx-auto">
                     {% for post in posts %}
                     <div class="card border-0   pb-8">
@@ -98,6 +99,11 @@
                     {% endfor %}
                     {% include "layouts/pagination.html" with page=posts %}
                 </div>
+                {% else %}
+                <div class="col-md-8 col-lg-9 mx-auto">
+                    <div class="alert alert-primary" role="alert">No Senses Found!</div>
+                </div>
+                {% endif %}
             </div>
             </div>
 

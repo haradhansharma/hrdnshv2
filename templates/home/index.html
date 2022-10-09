@@ -29,12 +29,14 @@
 </div>
 
 {% if messages %}
-<div class="col-12 text-center">
-    <div class="alert alert-secondary shadow-soft" role="alert">
+<div class="row align-items-center justify-content-center">
+<div class="col-12 col-lg-6 text-center">
+    <div class="alert alert-danger shadow-soft" role="alert">
         {% for message in messages %}
         <span class="alert-inner--text">{{ message }}</span>
         {% endfor %}
     </div>
+</div>
 </div>
 {% endif %}
 
@@ -52,7 +54,7 @@
     <div class="col-md-6 mb-3">
         <form method="post" id="looking_form" action="">
             {% csrf_token %}
-            <div class="form-check d-flex">
+            <div class="form-check d-flex ps-0">
                 {{ form.looking_for }}
                 <input class="btn btn-danger py-3 ms-2" form="looking_form" type="submit" value="GO">
             </div>
