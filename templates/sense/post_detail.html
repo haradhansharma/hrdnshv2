@@ -101,7 +101,7 @@
                     <div class="col d-flex">
                         <div class="card bg-lgreen shadow-sm flex-fill overflow-hidden">
                             {% if  sense.image %}
-                            <img src="{{blog.image.url}}" class="img-fluid" alt="{{sense.title}}">
+                            <img src="{% static blog.image.url %}" class="img-fluid" alt="{{sense.title}}">
                             {% else %}
                             {% endif %}
                             <div class="card-title px-2 mb-0 border-bottom py-2">

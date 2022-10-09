@@ -45,7 +45,7 @@
                 <p class="lead">{{service.description|truncatechars:50|safe}}</p>
               </div>
               <div class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden  shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                  <img src="{{ service.get_image.picture.url }}" class="img-fluid" alt="">            
+                  <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="">            
               </div>
             </a>           
         </div>   
@@ -78,7 +78,7 @@
                 <p class="lead">{{service.description|truncatechars:50|safe}}</p>
               </div>
               <div class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden  shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                  <img src="{{ service.get_image.picture.url }}" class="img-fluid" alt="">            
+                  <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="">            
               </div>
             </a>           
         </div>   
