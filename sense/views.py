@@ -17,17 +17,27 @@ def post_list(request, slug=None):
     
  
     context = {}    
-    posts = SensePost.published.all()#using custom manager    
+    
+    query = request.GET.get('q')
+    request.session['q'] = ''
+    
+    posts = SensePost.published.all().order_by('-updated') 
     paginator = Paginator(posts, 3)
     page = request.GET.get('page')
     tag = None
     if slug:
         tag = get_object_or_404(Tag, slug=slug)
-        posts=posts.filter(tags__in=[tag])    
+        posts=posts.filter(tags__in=[tag]).order_by('-updated')   
             
-    query = request.GET.get("q")      
-    if query:
-        posts=SensePost.published.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
+    elif query:
+        request.session['q'] = query
+        posts = posts.filter(Q(title__icontains=query) | Q(tags__name__icontains=query) | Q(body__icontains=query)).order_by('-updated').distinct() 
+        
+    else:
+        posts = posts   
+        
+    paginator = Paginator(posts, 10)
+    page = request.GET.get('page') 
     
     
     try:
@@ -45,6 +55,14 @@ def post_list(request, slug=None):
     return render(request, 'sense/senses.html', context)
 
 def post_detail(request, slug):  
+    
+    request.session['q'] = ''
+    
+    query = request.GET.get('q')
+    
+    if query:
+        request.session['q'] = query
+        return HttpResponseRedirect(reverse('sense:sense_list') + '?q=' + query)
        
     post = get_object_or_404(SensePost, slug=slug, status='published')
     post.view += 1
