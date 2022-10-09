@@ -26,10 +26,10 @@ def site_info():
         'phone': site.phone,
         'email': site.email,
         'location': site.location,
-        'facebook': site.facebook,
-        'twitter': site.twitter, 
-        'linkedin': site.linkedin,     
-        'github': site.github,   
+        # 'facebook': site.facebook,
+        # 'twitter': site.twitter, 
+        # 'linkedin': site.linkedin,     
+        # 'github': site.github,   
            
     } 
     
