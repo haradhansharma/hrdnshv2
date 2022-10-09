@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from .models import *
 from django.urls import reverse
 from common.common_processor import site_info, common_process
+from django.templatetags.static import static
 
 
 
@@ -12,14 +13,14 @@ def webmanifest(request):
     site = site_info()   
     icons = []    
     ic192 = {
-        "src": site.get('og_image'),
+        "src": static(site.get('og_image')),
         "sizes": "192x192",
         "type": "image/png"        
     }
     
     icons.append(ic192)   
     ic512 = {
-        "src": site.get('og_image'),
+        "src": static(site.get('og_image')),
         "sizes": "512x512",
         "type": "image/png"        
     }
@@ -31,10 +32,10 @@ def webmanifest(request):
         'start_url' : site.get('domain'),
         "scope": "/",
         'lang' : 'en',
-        'screenshots' : [site.get('og_image'), site.get('logo')],
+        'screenshots' : [static(site.get('og_image')), static(site.get('logo'))],
         'categories': site.get('tag'),
         
-        'description': site.get('site_description'),      
+       
         
         
         "theme_color": "#ffffff",
