@@ -51,17 +51,18 @@
 </head>
 
 <body id="parent_full" class="d-flex h-100 text-center text-white bg-darkteal">
-    <div  class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        {% include "layouts/v2_base_full_header.html" %}        
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        {% include "layouts/v2_base_full_header.html" %}
 
         <main class="px-3">
-            {% block content %}{% endblock content %}            
+            {% block content %}{% endblock content %}
         </main>
 
         {% include "layouts/v2_base_full_footer.html" %}
-        {% include 'layouts/scripts.html' %}        
+        {% include 'layouts/scripts.html' %}
         {% block javascripts %}{% endblock javascripts %}
-        
+
     </div>
 </body>
+
 </html>

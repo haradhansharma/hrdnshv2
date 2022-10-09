@@ -1,17 +1,16 @@
 <div class="container-fluid bg-light mt-4">
-<div class="container">
-    <div class="row text-center align-items-center justify-content-center mb-4 mt-4">
-        <div class="card o-90">
-        <div class="mt-4">
-        {% include "layouts/ads_webhostingpad.html" %}
+    <div class="container">
+        <div class="row text-center align-items-center justify-content-center mb-4 mt-4">
+            <div class="card o-90">
+                <div class="mt-4">
+                    {% include "layouts/ads_webhostingpad.html" %}
+                </div>
+                <div class="mt-4">
+                    {% include "layouts/ads_seranking.html" %}
+                </div>
+            </div>
         </div>
-        <div class="mt-4">
-        {% include "layouts/ads_seranking.html" %}
-        </div>
-        </div>
-
     </div>
-</div>
 </div>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
@@ -20,14 +19,13 @@
                 {% for name, path in footer_menu.items %}
                 <a href="{{path}} " class="me-2 {% if request.path == path %} border-bottom {% endif %}">{{name}}</a>
                 {% endfor %}
-                <a href="https://selfurl.xyz/bnhnaqixfo" target="_blank" class="me-2 {% if request.path == path %} border-bottom {% endif %}">Secure Digital Life</a>
-                <a href="https://selfurl.xyz/cglgvqloba" target="_blank" class="me-2 {% if request.path == path %} border-bottom {% endif %}">Elsifight</a>
+                <a href="https://selfurl.xyz/bnhnaqixfo" target="_blank"
+                    class="me-2 {% if request.path == path %} border-bottom {% endif %}">Secure Digital Life</a>
+                <a href="https://selfurl.xyz/cglgvqloba" target="_blank"
+                    class="me-2 {% if request.path == path %} border-bottom {% endif %}">Elsifight</a>
             </div>
             <p>&copy; All Right Reserved By <a href="https://selfurl.xyz/" class="text-primary">{{site.domain}}</a>,
                 Developed by <a href="https://hrdnsh.com" class="text-warning">Haradhan Sharma</a>.</p>
         </div>
-
-        
-
     </div>
 </footer>

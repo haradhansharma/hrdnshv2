@@ -1,17 +1,37 @@
 {% load static %}
 <header class="mb-auto">
         <div class="d-flex justify-content-between">
-    
-        <h3 class=" mb-0">
-                <a href="/">
-                <img src="{% static site.logo %}" height="40" alt="{{ site.name }}">
-            </a>
-        </h3>
-        <div class="text-end justify-content-end align-items-end">
-        <a href="{% url 'sense:sense_list' %}" class="mb-0 py-sm-0 py-md-2 px-sm-0 px-md-2 text-decoration-none d-block d-md-inline-block">Senses</a>
-        <a href="{% url 'home:elsifightbuilder' %}" target="_blank" class="mb-0 py-sm-0 py-md-2 px-sm-0 px-md-2 text-decoration-none d-block d-md-inline-block {% if  request.path == path %} active {% endif %} "> <svg width="20" height="20" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 243.96 234.86"><defs><style>.cls-1{fill:#ef3c65;}.cls-2{fill:#ef3a65;}</style></defs><title>fdf</title><path class="cls-1" d="M425.43,253.62c-.16,59.07-44.16,109.08-102.18,116.75-63.81,8.43-123.56-37.61-131.53-101.22a159.82,159.82,0,0,1-.68-24.94,25.46,25.46,0,0,1,.93-5.91c1.9-6.9,7.21-10.69,13.15-9.55,6.37,1.23,9.88,6.55,9.17,13.88a98.51,98.51,0,0,0,8.29,51.1c26.41,58.41,105.84,73,151.15,27.74,49.58-49.57,32.34-130.93-33.14-156a87.26,87.26,0,0,0-42.19-5.33,61.1,61.1,0,0,1-10.47.4c-6.59-.34-10.66-4.19-11.07-10-.42-6,3.37-10.85,9.67-12,28.84-5.2,56.15-.71,81.22,14.46,30,18.18,48.64,44.78,55.66,79.31C424.87,239.56,425.15,246.88,425.43,253.62Z" transform="translate(-181.47 -136.5)"/><path class="cls-2" d="M334.05,264c0,8.83.06,17.66,0,26.49-.06,6.58-4,9.13-9.83,6.25-10-4.91-20-9.84-29.81-15.14-11.25-6.08-17.52-15.35-17.57-28.59,0-11.64-5.93-20.56-14.42-27.94q-37.7-32.81-75.46-65.54c-.88-.76-1.79-1.5-2.65-2.28-2.82-2.54-3.88-5.55-1.55-8.83,2.21-3.11,5.21-3,8.42-1.37q18.62,9.62,37.29,19.16c28.12,14.42,56.21,28.91,84.39,43.23,14.24,7.23,22.26,18,21.27,34.59C333.72,250.65,334,257.34,334.05,264Z" transform="translate(-181.47 -136.5)"/></svg> Elsifight Builder</a>
-</div>
-</div>
-        
-    
+                <h3 class=" mb-0">
+                        <a href="/">
+                                <img src="{% static site.logo %}" height="40" alt="{{ site.name }}">
+                        </a>
+                </h3>
+                <div class="text-end justify-content-end align-items-end">
+                        <a href="{% url 'sense:sense_list' %}"
+                                class="mb-0 py-sm-0 py-md-2 px-sm-0 px-md-2 text-decoration-none d-block d-md-inline-block">Senses</a>
+                        <a href="{% url 'home:elsifightbuilder' %}" target="_blank"
+                                class="mb-0 py-sm-0 py-md-2 px-sm-0 px-md-2 text-decoration-none d-block d-md-inline-block {% if  request.path == path %} active {% endif %} ">
+                                <svg width="20" height="20" id="Layer_1" data-name="Layer 1"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 243.96 234.86">
+                                        <defs>
+                                                <style>
+                                                        .cls-1 {
+                                                                fill: #ef3c65;
+                                                        }
+
+                                                        .cls-2 {
+                                                                fill: #ef3a65;
+                                                        }
+                                                </style>
+                                        </defs>
+                                        <title>fdf</title>
+                                        <path class="cls-1"
+                                                d="M425.43,253.62c-.16,59.07-44.16,109.08-102.18,116.75-63.81,8.43-123.56-37.61-131.53-101.22a159.82,159.82,0,0,1-.68-24.94,25.46,25.46,0,0,1,.93-5.91c1.9-6.9,7.21-10.69,13.15-9.55,6.37,1.23,9.88,6.55,9.17,13.88a98.51,98.51,0,0,0,8.29,51.1c26.41,58.41,105.84,73,151.15,27.74,49.58-49.57,32.34-130.93-33.14-156a87.26,87.26,0,0,0-42.19-5.33,61.1,61.1,0,0,1-10.47.4c-6.59-.34-10.66-4.19-11.07-10-.42-6,3.37-10.85,9.67-12,28.84-5.2,56.15-.71,81.22,14.46,30,18.18,48.64,44.78,55.66,79.31C424.87,239.56,425.15,246.88,425.43,253.62Z"
+                                                transform="translate(-181.47 -136.5)" />
+                                        <path class="cls-2"
+                                                d="M334.05,264c0,8.83.06,17.66,0,26.49-.06,6.58-4,9.13-9.83,6.25-10-4.91-20-9.84-29.81-15.14-11.25-6.08-17.52-15.35-17.57-28.59,0-11.64-5.93-20.56-14.42-27.94q-37.7-32.81-75.46-65.54c-.88-.76-1.79-1.5-2.65-2.28-2.82-2.54-3.88-5.55-1.55-8.83,2.21-3.11,5.21-3,8.42-1.37q18.62,9.62,37.29,19.16c28.12,14.42,56.21,28.91,84.39,43.23,14.24,7.23,22.26,18,21.27,34.59C333.72,250.65,334,257.34,334.05,264Z"
+                                                transform="translate(-181.47 -136.5)" />
+                                </svg> Elsifight Builder</a>
+                </div>
+        </div>
 </header>
