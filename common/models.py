@@ -11,7 +11,7 @@ class ExSite(models.Model):
     site_favicon = models.ImageField(upload_to='site_image')
     site_logo = models.ImageField(upload_to='site_image')
     slogan = models.CharField(max_length=150, default='')
-    og_image = models.ImageField(upload_to='site_image')
+    og_image = models.ImageField(upload_to='bg')
     mask_icon = models.FileField(upload_to='site_image', validators=[FileExtensionValidator(['svg'])])
     
     

@@ -25,7 +25,7 @@
                                     
                                     <a class="text-decoration-none "
                                         href="{{ certificate.valid_link }}" target="_blank">
-                                        <img class="img-fluid h-100" src="{{certificate.digital_pic.url}}"
+                                        <img class="img-fluid h-100" src="{% static certificate.digital_pic.url %}"
                                             alt="{{certificate.name}}">
                                     </a>
                                    
@@ -71,7 +71,7 @@
             <div class="col-md-6 col-xl-4 d-flex">
                 <div class="card bg-silver py-4 px-5 pt-2 my-3 flex-fill">
                     <div class="position-absolute top-0 start-50 translate-middle"> 
-                        <img src="{{site.favicon}}" class="img-fluid rounded-circle shadow" alt="Haradham Sharma">
+                        <img src="{% static site.favicon %}" class="img-fluid rounded-circle shadow" alt="Haradham Sharma">
                     </div>
                     <h4 class="mt-4 mb-3 p-3 text-center text-danger border-bottom border-3 border-dark"> 
                         {{skill.cat_of_skill}}</h4>
@@ -116,7 +116,7 @@
                     <div class="">
                         <a class="overflow-hidden" style="max-height: 180px; min-height: 180px;"
                             href="{% url 'bio:service_details' request.session.looking_for  service.slug %}"><img
-                                src="{{service.get_image.picture.url}}" class="img-fluid "
+                                src="{% static service.get_image.picture.url %}" class="img-fluid "
                                 alt="{{service.get_image.alt}}"></a>
                         <div class="card-body serviceoption">
                             <h5 class="fw-bold border-bottom border-3 text-darkbeige border-danger pb-2">
@@ -193,7 +193,7 @@
                                         {% if works.get_image != '' %}
                                         <a class="text-decoration-none "
                                             href="{% url 'bio:work_details' request.session.looking_for works.slug %}">
-                                            <img class="img-fluid h-100" src="{{works.get_image.picture.url}}"
+                                            <img class="img-fluid h-100" src="{% static works.get_image.picture.url %}"
                                                 alt="{{works.title}}">
                                         </a>
                                         {% endif %}

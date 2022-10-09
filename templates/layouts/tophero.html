@@ -1,8 +1,9 @@
+{% load static %}
 <div class="bg-myblack p-4 text-light o-95">
     <div class="container py-5">
         <div class="row d-xl-flex justify-content-center">
             <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                <img src="{{me_data.photo.url}}" class="rounded img-thumbnail"  alt="{{me_data.title}}">
+                <img src="{% static me_data.photo.url %}" class="rounded img-thumbnail"  alt="{{me_data.title}}">
             </div>
             <div class="col-12 col-xl-10 text-center text-xl-start">
                 <div class="fs-5 text-danger mb-1">Hi, my name is___</div>
