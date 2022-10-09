@@ -26,8 +26,8 @@ def webmanifest(request):
     }
     icons.append(ic512)    
     manifest_data = {
-        'name' : site.get('name'),
-        'short_name' : 'Haradhan Sharma',
+        'name' : site.get('name') + '--' + site.get('slogan'),
+        'short_name' : site.get('name'),
         'icons' : icons,
         'start_url' : site.get('domain'),
         "scope": "/",
@@ -35,11 +35,11 @@ def webmanifest(request):
         'screenshots' : [static(site.get('og_image')), static(site.get('logo'))],
         'categories': site.get('tag'),
         
-       
+        "description": site.get('description'),
         
-        
-        "theme_color": "#ffffff",
-        "background_color": "#ffffff",
+        "orientation": "any",
+        "theme_color": "#892d2c",
+        "background_color": "#892d2c",
         "display": "standalone"        
     }
     
