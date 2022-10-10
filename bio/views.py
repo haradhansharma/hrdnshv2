@@ -46,7 +46,9 @@ def view_cat(request, **kwargs):
         'me_data': me_data,
         'category': category,
         'categoris_of_products': list(categoris_of_products),
-        'related_service_by_categories': rsbc
+        'related_service_by_categories': rsbc,
+        'alter' : reverse('bio:view_cat', args=[str(common_process(request).get('alternat_looking')), slug]) 
+        
     }
     return render(request, 'bio/category.html', context=context)
 

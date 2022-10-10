@@ -2,136 +2,101 @@
 {% load static %}
 {% load custom_tags %}
 
-{% block title %}{{site.name}}'s categorywise service {% endblock %}
+{% block title %}categorywise service for category {{category.name}} {% endblock %}
 {% block content %}
 
 {% include "layouts/tophero.html" %}
+<div class="text-center bg-light o-95 p-3">
+  <h1 class="display-5 fw-normal">Service Category: {{category.name}}</h1>
+  <div class="p-2">
+    <p class="fst-italic">Inform your audience about the services listed here:</p>
+    <div class="addthis_inline_share_toolbox_spsh mt-2"></div>
+  </div>
+</div>
+<div class="bg-dark o-95">
+  <div class="container">
+    <div class="row g-3 p-3">
+      {% for service in services %}
+      <div class="col-12 col-md-6 d-flex">
+        <div class="{% if forloop.counter|divisibleby:2 %} {{service.dark_body_class}} {% else %} {{service.light_body_class}} {% endif %} flex-fill position-relative">
+          <a href="{% url 'bio:service_details' request.session.looking_for  service.slug %}"
+            class="text-decoration-none text-center {% if forloop.counter|divisibleby:2 %} link-light {% else %} link-dark {% endif %}">
+            <div class="d-flex justify-content-between align-items-center fw-bold fs-6 {% if forloop.counter|divisibleby:2 %} {{service.dark_head_class}} {{service.dark_link_class}} {% else %} {{service.light_head_class}} {{service.light_link_class}} {% endif %}">
+              <p class="p-4">{{service.name}}</p>
+              <p class="p-4">Starting From ${{service.get_starting_price}} </p>
+            </div>
 
-
-
-<div class="row g-3 m-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto ">
-    <h1 class="display-4 fw-normal">{{category.name}}</h1>
-    <div class="p-4">
-      <p class="fst-italic">Inform your audience about this service:</p>
-      <div class="addthis_inline_share_toolbox_spsh mt-2"></div>
-      <h5>Related Categories By The Services</h5>
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="btn-group">
-          {% for cat in categoris_of_products %}
-          <a class="btn btn-sm" href="{% url 'bio:view_cat' request.session.looking_for cat.slug %}">#{{cat.name}}</a>
-          {% endfor %}
+            <div class="my-3 px-3">
+              <p class="lead">{{service.description|truncatechars:150|striptags}}</p>
+            </div>
+            <div style="min-height: 250px;">
+              <div class="position-absolute bottom-0 start-50 translate-middle-x w-100">
+                <div
+                  class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden col-10 shadow-sm mx-auto"
+                  style="height: 250px; border-radius: 21px 21px 0 0;filter: grayscale(100%);">
+                  <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="{{service.name}}">
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </div>
 
-<div class="row">
-  {% for service in services %}
-  <div class="col-6 g-3 p-3 d-flex">
-    
-    <div class="{% if forloop.counter|divisibleby:2 %} {{service.dark_class}} {% else %} {{service.light_class}} {% endif %} flex-fill position-relative">
-      <a href="{% url 'bio:service_details' request.session.looking_for  service.slug %}" class="text-decoration-none text-center {% if forloop.counter|divisibleby:2 %} link-light {% else %} link-dark {% endif %}">
-      <div class="d-flex justify-content-between align-items-center {% if forloop.counter|divisibleby:2 %} bg-brightbeige {% else %} bg-darkbeige {% endif %}">
-        <p class="p-4">{{service.name}}</p>
-        <p class="p-4">Starting From ${{service.get_starting_price}} </p>
-      </div>
 
-      <div class="my-3 py-3">
-        <h2 class="display-5">{{service.name}}</h2>
-        <p class="lead">{{service.description|truncatechars:50|safe}}</p>
-      </div>
-      <div style="min-height: 300px;">
-        <div class="position-absolute bottom-0 start-50 translate-middle-x w-100">
-          <div
-            class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden col-10 shadow-sm mx-auto"
-            style="height: 300px; border-radius: 21px 21px 0 0;">
-            <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="{{service.name}}">
-          </div>
-        </div>
-      </div>
-    </a>
-    </div>
-
-  </div>
-
-  {% endfor %}
-</div>
-
-
-<div class="row row-cols-1 row-cols-lg-2 g-3 p-3">
-  {% for service in services %}
-  <div class="col d-flex">
-    <div
-      class="{% if forloop.counter|divisibleby:2 %} {{service.dark_class}} text-white {% else %} {{service.light_class}} text-dark {% endif %} flex-fill">
-      <div class="d-flex justify-content-between align-items-center border-bottom bg-primary">
-        <p class="p-4">{{service.name}}</p>
-        <p class="p-4">Starting From ${{service.get_starting_price}} </p>
-      </div>
-      <a href="{% url 'bio:service_details' request.session.looking_for  service.slug %}" class="text-decoration-none text-center ">
-        <div class="my-3 py-3">
-          <h2 class="display-5">{{service.name}}</h2>
-          <p class="lead">{{service.description|truncatechars:50|safe}}</p>
-        </div>
-        <div
-          class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden col-10 shadow-sm mx-auto"
-          style="height: 300px; border-radius: 21px 21px 0 0;">
-          <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="{{service.name}}">
-        </div>
-      </a>
-    </div>
-  </div>
-  {% endfor %}
-</div>
 
 
 {% if related_service_by_categories %}
-<div class="g-3 p-3 text-center ">
-  <div class="bg-light p-5 mx-auto ">
-    <h1 class="display-4 fw-normal">Related Services</h1>
+<div class="text-center bg-light o-95 p-3">
+  <h1 class="display-5 fw-normal">Related Services</h1>
+  <div class="p-2">
+    <p class="fst-italic">Services are related to this categoryhas been listed here</p>
   </div>
 </div>
 
-<div class="row row-cols-1 row-cols-lg-2 g-3 p-3">
-  {% for service in related_service_by_categories %}
-  <div class="col ">
-    <div
-      class="{% if forloop.counter|divisibleby:2 %} {{service.dark_class}} text-white {% else %} {{service.light_class}} text-dark {% endif %}">
-      <div class="d-flex justify-content-between align-items-center border-bottom bg-primary">
-        <p class="p-4">{{service.name}}</p>
-        <p class="p-4">Starting From ${{service.get_starting_price}} </p>
-      </div>
+<div class="bg-dark o-95">
+  <div class="container">
+    <div class="row g-3 p-3">
+      {% for service in related_service_by_categories %}
+      <div class="col-12 col-md-6 d-flex">
+        <div class="{% if forloop.counter|divisibleby:2 %} {{service.dark_body_class}} {% else %} {{service.light_body_class}} {% endif %} flex-fill position-relative">
+          <a href="{% url 'bio:service_details' request.session.looking_for  service.slug %}"
+            class="text-decoration-none text-center {% if forloop.counter|divisibleby:2 %} link-light {% else %} link-dark {% endif %}">
+            <div class="d-flex justify-content-between align-items-center fw-bold fs-6 {% if forloop.counter|divisibleby:2 %} {{service.dark_head_class}} {{service.dark_link_class}} {% else %} {{service.light_head_class}} {{service.light_link_class}} {% endif %}">
+              <p class="p-4">{{service.name}}</p>
+              <p class="p-4">Starting From ${{service.get_starting_price}} </p>
+            </div>
 
-      <a href="{% url 'bio:service_details' request.session.looking_for  service.slug %}"
-        class=" text-decoration-none text-center ">
-        <div class="my-3 py-3">
-          <h2 class="display-5">{{service.name}}</h2>
-          <p class="lead">{{service.description|truncatechars:50|safe}}</p>
+            <div class="my-3 px-3">
+              <p class="lead">{{service.description|truncatechars:150|striptags}}</p>
+            </div>
+            <div style="min-height: 250px;">
+              <div class="position-absolute bottom-0 start-50 translate-middle-x w-100">
+                <div
+                  class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden col-10 shadow-sm mx-auto"
+                  style="height: 250px; border-radius: 21px 21px 0 0;filter: grayscale(100%);">
+                  <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="{{service.name}}">
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
-        <div
-          class="{% if forloop.counter|divisibleby:2 %}{{service.light_class}}{% else %}{{service.dark_class}}{% endif %} overflow-hidden  shadow-sm mx-auto"
-          style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-          <img src="{% static service.get_image.picture.url %}" class="img-fluid" alt="{{service.name}}">
-        </div>
-      </a>
+      </div>
+      {% endfor %}
     </div>
   </div>
-  {% endfor %}
 </div>
 {% endif %}
-
-
-
 
 {% endblock content %}
 
 {% block javascripts %}
-
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4d95fcae2a2f4222"></script>
 <script type="text/javascript">
-
   var addthis_share = {
     url: "{{request.build_absolute_uri}}",
     title: "The service named '{{service.name}}' might be helpful to you which was discovered at ",
