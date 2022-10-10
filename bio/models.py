@@ -225,7 +225,7 @@ class MyService(models.Model):
     
     light_head_class = models.CharField(max_length=15, default='bg-darkbeige')
     light_body_class = models.CharField(max_length=15, default='bg-brightbeige')
-    light_link_class = models.CharField(max_length=15, default='link-brightbeige')
+    light_link_class = models.CharField(max_length=25, default='link-brightbeige')
     
     
     objects = models.Manager()
