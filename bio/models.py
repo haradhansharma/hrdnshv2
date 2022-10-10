@@ -217,8 +217,17 @@ class MyService(models.Model):
     skills_involved = models.ManyToManyField(MySkills, related_name='skillsinservice')
     
     
-    dark_class = models.CharField(max_length=15, default='bg-dark')
-    light_class = models.CharField(max_length=15, default='bg-light')
+    dark_head_class = models.CharField(max_length=15, default='bg-deepgrey')
+    dark_body_class = models.CharField(max_length=15, default='bg-lightgrey')
+    dark_link_class = models.CharField(max_length=15, default='link-lightgrey')
+    
+    
+    
+    light_head_class = models.CharField(max_length=15, default='bg-darkbeige')
+    light_body_class = models.CharField(max_length=15, default='bg-brightbeige')
+    light_link_class = models.CharField(max_length=15, default='link-brightbeige')
+    
+    
     objects = models.Manager()
     
     @property

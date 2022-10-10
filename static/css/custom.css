@@ -60,6 +60,13 @@ body::before {
 .bottom-5 {
   bottom: 5%!important;
 }
+.bg-deepgrey {
+  background-color: #4f4f4f!important;
+}
+.bg-lightgrey {
+  background-color: #686868!important;
+}
+
 .bg-myred {
   background-color: #ED2024!important;
 }
@@ -95,16 +102,12 @@ body::before {
   color : #C7C7C6!important;
 }
 
-.link-darkbeige {
-  color : #8D6B4D!important;
 
-}
+.link-brightbeige {color:#BF9775}
+.link-brightbeige:focus, .link-brightbeige:hover{color:#a78568}
 
-.link-myblack {
-  color : #231F20!important;
-
-}
-
+.link-lightgrey {color:#686868}
+.link-lightgrey:focus, .link-lightgrey:hover{color:#585858}
 
 .serviceoption .nav-link.active {
   background-color: #8D6B4D!important;
