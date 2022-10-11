@@ -1,3 +1,4 @@
+from django.http import Http404
 from .models import *
 
 def get_me_data(request):
@@ -7,8 +8,10 @@ def get_me_data(request):
             me_data = Me.webobjects.get()        
         elif looking_session == 'fashion':
             me_data = Me.fashionobjects.get()
-    except:
-        me_data = None
+            
+        return me_data
         
-    return me_data
+    except:
+        raise Http404
+        
     

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from .forms import *
 from bio.helper import get_me_data
-from .decorators import looking_for_required, no_looking_required
+from .decorators import looking_for_required, no_looking_required, set_looking_for
 from common.common_processor import site_info, common_process
 from django.template.defaultfilters import striptags
 
@@ -29,7 +29,7 @@ def home(request):
         }
     return render(request, 'home/index.html', context = context)
 
-@looking_for_required
+@set_looking_for
 def looking(request, **kwargs): 
     looking = kwargs['looking']
      

@@ -84,6 +84,7 @@ class Certificate(models.Model):
     digital_pic = models.ImageField(upload_to='certificate')
     valid_link = models.URLField()
     
+    
     def __str__(self):
         return self.name
     
@@ -108,12 +109,6 @@ class Education(models.Model):
     def __str__(self):
         return self.title
     
-
-    
-    
-    
-    
-    
 class MyLinks(models.Model):
     me = models.ForeignKey(Me, on_delete=models.CASCADE, related_name='mylinks')
     links = models.URLField(blank=True,)
@@ -133,9 +128,6 @@ class SkillsIn(models.Model):
     show_in_service_details = models.BooleanField(default=True)
     show_in_work_details = models.BooleanField(default=True)
     show_in_cv_tech = models.BooleanField(default=True)
-    
-    
-    
     
     def __str__(self) -> str:
         return str(self.name) + '-' + str(self.skil_value)
@@ -175,6 +167,8 @@ class MySkills(models.Model):
 class ServiceCategory(models.Model):
     name = models.CharField(max_length=252)
     slug = models.SlugField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True)    
     objects = models.Manager()
     
     def save(self, *args, **kwargs):
@@ -197,13 +191,6 @@ class ServiceCategory(models.Model):
     @property
     def services(self):
         return MyService.objects.filter(category=self)
-    
-    # abandoned due to compolsurity of session so calling from template
-    # def get_absolute_url(self):
-    #     return reverse('bio:view_cat', kwargs={'slug': self.slug})
-    
-
-
 
 
 class MyService(models.Model):
@@ -212,8 +199,9 @@ class MyService(models.Model):
     name = models.CharField(max_length=252)    
     description = models.TextField()
     category = models.ManyToManyField(ServiceCategory, related_name='categories')    
-    mp_links = models.TextField()# need take help of custom tag, name=link patern should follow to write
-    # skills_involved = models.ManyToManyField(SkillsIn, related_name='skillsinservice')
+    mp_links = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True) 
     skills_involved = models.ManyToManyField(MySkills, related_name='skillsinservice')
     
     
@@ -311,7 +299,8 @@ class MyWorks(models.Model):
     icon = models.TextField(null=True, blank=True)
     short_des = models.TextField(max_length=50)
     description = models.TextField()
-    # skills_involved = models.ManyToManyField(SkillsIn, related_name='skillsinworks')
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True) 
     skills_involved = models.ManyToManyField(MySkills, related_name='skillsinworks')
     
     category = models.ManyToManyField(ServiceCategory, related_name='workcategories')    
@@ -347,6 +336,8 @@ class WorkExperience(models.Model):
     period = models.CharField(max_length=252, null=True, blank=True)
     serial = models.BigIntegerField(default=0)
     active = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True) 
     
     @property
     def technology_used(self):

@@ -1,11 +1,6 @@
 from . import views
 from django.urls import path
 
-
-
-
-
-
 app_name = 'bio'
 urlpatterns = [
  
@@ -14,10 +9,5 @@ urlpatterns = [
     path('<str:looking>/works/<str:slug>', views.work_details, name='work_details'),
     path('cv/<str:looking>', views.cv, name='cv'),    
     path('cv/<str:looking>/pdf', views.cvpdf, name='cvpdf'),
- 
-    
-   
-    
-    
     
 ]

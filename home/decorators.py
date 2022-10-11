@@ -4,6 +4,22 @@ from django.urls import resolve, reverse
 from django.contrib import messages
 from common.common_processor import looking_list
 
+def set_looking_for(function):
+    
+    def wrap(request, *args, **kwargs):
+        if kwargs.get('looking'):
+            request.session['looking_for'] = kwargs['looking']
+            print(request.session['looking_for'])
+            return function(request, *args, **kwargs)
+        else:
+            messages.warning(request,'Choose the area in which you need help from the box below!')       
+            return HttpResponseRedirect(reverse('home:home'))  
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__                
+    return wrap
+            
+            
+
 
 def looking_for_required(function):    
     def wrap(request, *args, **kwargs):       

@@ -5,7 +5,7 @@ from django.template.loader import get_template
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from bio.helper import get_me_data
-from home.decorators import looking_for_required, no_looking_required
+from home.decorators import looking_for_required, no_looking_required, set_looking_for
 from .models import *
 from common.common_processor import site_info, common_process
 import platform
@@ -23,7 +23,7 @@ def get_verbose_name(instance, field_name):
     return instance._meta.get_field(field_name).verbose_name.title()
 
 
-@looking_for_required
+@set_looking_for
 def view_cat(request, **kwargs): 
     
     slug = kwargs['slug']
@@ -125,7 +125,7 @@ def compile(ls):
             dx[k] = current
     return dx
 
-@looking_for_required
+@set_looking_for
 def service_details(request, **kwargs):
     slug = kwargs['slug']
     looking = kwargs['looking']
@@ -158,7 +158,7 @@ def service_details(request, **kwargs):
     return render(request, 'bio/service_detail.html', context=context)
 
 
-@looking_for_required
+@set_looking_for
 def work_details(request, **kwargs):
     slug = kwargs['slug']
     looking = kwargs['looking']
@@ -187,7 +187,7 @@ def work_details(request, **kwargs):
     return render(request, 'bio/work_detail.html', context=context)
 
 
-@looking_for_required
+@set_looking_for
 def cv(request, **kwargs):
 
     looking = kwargs['looking']
@@ -219,7 +219,6 @@ def cv(request, **kwargs):
 
     
 
-@looking_for_required
 def render_html(request, **kwargs):
     me_data = get_me_data(request)    
     static_url = '%s://%s%s' % (request.scheme,
@@ -244,7 +243,7 @@ def render_html(request, **kwargs):
         html = template.render(context)
         return html
 
-@looking_for_required
+@set_looking_for
 def cvpdf(request, **kwargs):
     site = site_info()
     site_email = site.get('email')

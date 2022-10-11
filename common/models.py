@@ -18,10 +18,7 @@ class ExSite(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()    
     location=models.CharField(max_length=120, null=True, blank=True)
-    # facebook = models.URLField(null=True, blank=True)
-    # twitter = models.URLField(null=True, blank=True)
-    # linkedin = models.URLField(null=True, blank=True)   
-    # github =  models.URLField(null=True, blank=True) 
+
 
     
     
