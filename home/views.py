@@ -5,7 +5,7 @@ from .forms import *
 from bio.helper import get_me_data
 from .decorators import looking_for_required, no_looking_required
 from common.common_processor import site_info, common_process
-
+from django.template.defaultfilters import striptags
 
 
 
@@ -31,14 +31,26 @@ def home(request):
 
 @looking_for_required
 def looking(request, **kwargs): 
-    try:   
-        me_data = get_me_data(request)  
-    except:
-        me_data = None
+    looking = kwargs['looking']
+     
+    me_data = get_me_data(request)     
+        
+    seo_info = site_info() 
+    modify = {
+        'canonical' : request.build_absolute_uri(reverse('home:looking', args=[str(looking)])),        
+        'slogan' : f'Overview about me related to {looking} sector',
+        'description' : f'{striptags(me_data.summary)[:160]}...',
+        'topic' : f'{looking} overview ',
+        'type' : f'My Overview',
+        'robots' : f'index, follow',
+        'og_image' : me_data.photo.url 
+    }    
+    seo_info.update(modify)   
     
     context = {
         'me_data': me_data,
-        'alter' : reverse('home:looking', args=[str(common_process(request).get('alternat_looking'))]) 
+        'alter' : reverse('home:looking', args=[str(common_process(request).get('alternat_looking'))]) ,
+        'site' : seo_info,
     }
     return render(request, 'home/looking.html', context = context)
 

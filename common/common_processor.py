@@ -26,6 +26,9 @@ def site_info():
         'phone': site.phone,
         'email': site.email,
         'location': site.location,
+        'topic' : 'Personal Biodata',
+        'type' : 'CV and Blogging',
+        'robots' : "index, follow"
         # 'facebook': site.facebook,
         # 'twitter': site.twitter, 
         # 'linkedin': site.linkedin,     

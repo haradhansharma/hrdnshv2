@@ -3,15 +3,10 @@
 {% load custom_tags %}
 
 {% block title %}
-{{site.name}}'s overview in 
-{% if request.session.looking_for == 'web' %}
-Web Development
-{% endif %}
-{% if request.session.looking_for == 'fashion' %}
-Fashion Technology
-{% endif %}
-
+{{site.slogan}}
 {% endblock %}
+
+
 {% block content %}
 
 {% include "layouts/tophero.html" %}

@@ -11,6 +11,7 @@ from common.common_processor import site_info, common_process
 import platform
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.template.defaultfilters import striptags
 
 # helper function 
 
@@ -23,14 +24,27 @@ def get_verbose_name(instance, field_name):
 
 
 @looking_for_required
-def view_cat(request, **kwargs):
+def view_cat(request, **kwargs): 
+    
     slug = kwargs['slug']
     looking = kwargs['looking']
     me_data = get_me_data(request)
-
+    
     category = ServiceCategory.objects.get(slug=slug)
     me = Me.objects.get(me_for=looking)
     services = category.services.filter(me=me)
+    
+    
+    seo_info = site_info() 
+    modify = {
+        'canonical' : request.build_absolute_uri(reverse('bio:view_cat', args=[str(looking), slug])),        
+        'slogan' : f'categorywise service for category {category.name}',
+        'description' : f'{striptags(me_data.summary)[:160]}...',
+        'topic' : f'Category wise service list that I provide',
+        'type' : f'Service List',
+        'robots' : f'index, follow'
+    }    
+    seo_info.update(modify)     
 
     categoris_of_products = set()
     related_service_by_categories = set()
@@ -47,6 +61,7 @@ def view_cat(request, **kwargs):
         'category': category,
         'categoris_of_products': list(categoris_of_products),
         'related_service_by_categories': rsbc,
+        'site' : seo_info,
         'alter' : reverse('bio:view_cat', args=[str(common_process(request).get('alternat_looking')), slug]) 
         
     }
@@ -118,10 +133,27 @@ def service_details(request, **kwargs):
     com_data = comparision(service)
 
     me_data = get_me_data(request)
+    
+    
+    seo_info = site_info() 
+    modify = {
+        'canonical' : request.build_absolute_uri(reverse('bio:service_details', args=[str(looking), slug])),        
+        'slogan' : f'Service details of {service.name}',
+        'description' : f'{striptags(service.description)[:160]}...',
+        'topic' : f'Details about service {service.name}',
+        'type' : f'Details of service',
+        'robots' : f'index, follow',
+        'og_image' : service.get_image.picture.url
+    }    
+    seo_info.update(modify)   
+    
+    
+    
     context = {
         'me_data': me_data,
         'service': service,
-        'com_data': com_data
+        'com_data': com_data,
+        'site' : seo_info,
     }
     return render(request, 'bio/service_detail.html', context=context)
 
@@ -132,10 +164,24 @@ def work_details(request, **kwargs):
     looking = kwargs['looking']
     me_data = get_me_data(request)
     work = get_object_or_404(MyWorks, slug=slug)
+    
+    
+    seo_info = site_info() 
+    modify = {
+        'canonical' : request.build_absolute_uri(reverse('bio:work_details', args=[str(looking), slug])),        
+        'slogan' : f'Work details of {work.title}',
+        'description' : f'{striptags(work.description)[:160]}...',
+        'topic' : f'Details about my work {work.title}',
+        'type' : f'Details of work',
+        'robots' : f'index, follow',
+        'og_image' : work.get_image.picture.url
+    }    
+    seo_info.update(modify)   
 
     context = {
         'me_data': me_data,
         'service': work,
+        'site' : seo_info,
 
     }
     return render(request, 'bio/work_detail.html', context=context)
@@ -147,12 +193,25 @@ def cv(request, **kwargs):
     looking = kwargs['looking']
     me_data = get_me_data(request)
     
+    seo_info = site_info() 
+    modify = {
+        'canonical' : request.build_absolute_uri(reverse('bio:cv', args=[str(looking)])),        
+        'slogan' : f'My HTML CV of {looking} sector',
+        'description' : f'{striptags(me_data.summary)[:160]}...',
+        'topic' : f'{looking} HTML CV ',
+        'type' : f'Html CV',
+        'robots' : f'index, follow',
+        'og_image' : me_data.photo.url 
+    }    
+    seo_info.update(modify)   
+    
 
     context = {
         'me_data': me_data,
         'interest' : Interest.objects.all(),
         'languge' : Languge.objects.all(),
-        'alter' : reverse('bio:cv', args=[str(common_process(request).get('alternat_looking'))])
+        'alter' : reverse('bio:cv', args=[str(common_process(request).get('alternat_looking'))]),
+        'site' : seo_info,
 
 
     }

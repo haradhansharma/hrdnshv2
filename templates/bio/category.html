@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_tags %}
 
-{% block title %}categorywise service for category {{category.name}} {% endblock %}
+{% block title %}{{ site.slogan }}{% endblock %}
 {% block content %}
 
 {% include "layouts/tophero.html" %}
@@ -99,7 +99,7 @@
 <script type="text/javascript">
   var addthis_share = {
     url: "{{request.build_absolute_uri}}",
-    title: "The service named '{{service.name}}' might be helpful to you which was discovered at ",
+    title: "The services under category '{{category.name}}' might be helpful to you which was discovered at ",
   }
   var addthis_config = {
     data_track_clickback: false,
