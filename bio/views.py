@@ -220,14 +220,15 @@ def cv(request, **kwargs):
     
 
 def render_html(request, **kwargs):
+    
     me_data = get_me_data(request)    
     #active below for windows development server
-    static_url = '%s://%s%s' % (request.scheme,
-                                request.get_host(), settings.STATIC_URL)
-    media_url = '%s://%s%s' % (request.scheme,
-                               request.get_host(), settings.MEDIA_URL)
+    # static_url = '%s://%s%s' % (request.scheme,
+    #                             request.get_host(), settings.STATIC_URL)
+    # media_url = '%s://%s%s' % (request.scheme,
+    #                            request.get_host(), settings.MEDIA_URL)
     
-
+    # print(media_url)
     title = '{}_{}_cv.pdf'.format(str(((me_data.title).lower()).replace(' ', '_')), str(kwargs['looking'])) 
     
     context = {
@@ -239,16 +240,17 @@ def render_html(request, **kwargs):
         'education' : Education.objects.all(),        
     }
     #active below for windows development server
-    with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
-        template = get_template('bio/cvpdf.html')
-        context = context
-        html = template.render(context)
-        return html
+    # with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
+    template = get_template('bio/cvpdf.html')
+    context = context
+    html = template.render(context)
+    return html
 
 @set_looking_for
 def cvpdf(request, **kwargs):
     site = site_info()
     site_email = site.get('email')
+    
     
     
     content = render_html(request, **kwargs)
@@ -273,6 +275,8 @@ def cvpdf(request, **kwargs):
             'margin-right': '0.05in',
             'margin-bottom': '0.05in',
             'margin-left': '0.05in',
+            "enable-local-file-access": '',
+            'javascript-delay': 3000,
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
             ],
