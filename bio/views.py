@@ -12,7 +12,7 @@ import platform
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.template.defaultfilters import striptags
-
+from django.conf import settings
 # helper function 
 
 
@@ -174,7 +174,7 @@ def work_details(request, **kwargs):
         'topic' : f'Details about my work {work.title}',
         'type' : f'Details of work',
         'robots' : f'index, follow',
-        'og_image' : work.get_image.picture.url
+        'og_image' : work.get_image.picture.url if work.get_image else None
     }    
     seo_info.update(modify)   
 
@@ -221,27 +221,29 @@ def cv(request, **kwargs):
 
 def render_html(request, **kwargs):
     me_data = get_me_data(request)    
-    static_url = '%s://%s%s' % (request.scheme,
-                                request.get_host(), settings.STATIC_URL)
-    media_url = '%s://%s%s' % (request.scheme,
-                               request.get_host(), settings.MEDIA_URL)
+    #active below for windows development server
+    # static_url = '%s://%s%s' % (request.scheme,
+    #                             request.get_host(), settings.STATIC_URL)
+    # media_url = '%s://%s%s' % (request.scheme,
+    #                            request.get_host(), settings.MEDIA_URL)
     
-    title = '{}_{}_cv.pdf'.format(str(((me_data.title).lower()).replace(' ', '_')), str(kwargs['looking'])) 
 
+    title = '{}_{}_cv.pdf'.format(str(((me_data.title).lower()).replace(' ', '_')), str(kwargs['looking'])) 
+    
     context = {
         'me_data': me_data,
         'title' : title,
         'site' : site_info(),
         'interest' : Interest.objects.all(),
         'languge' : Languge.objects.all(),
-        'education' : Education.objects.all()
+        'education' : Education.objects.all(),        
     }
-
-    with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
-        template = get_template('bio/cvpdf.html')
-        context = context
-        html = template.render(context)
-        return html
+    #active below for windows development server
+    # with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
+    template = get_template('bio/cvpdf.html')
+    context = context
+    html = template.render(context)
+    return html
 
 @set_looking_for
 def cvpdf(request, **kwargs):

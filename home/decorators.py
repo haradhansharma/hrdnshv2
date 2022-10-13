@@ -8,8 +8,7 @@ def set_looking_for(function):
     
     def wrap(request, *args, **kwargs):
         if kwargs.get('looking'):
-            request.session['looking_for'] = kwargs['looking']
-            print(request.session['looking_for'])
+            request.session['looking_for'] = kwargs['looking']           
             return function(request, *args, **kwargs)
         else:
             messages.warning(request,'Choose the area in which you need help from the box below!')       

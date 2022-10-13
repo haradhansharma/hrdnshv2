@@ -28,21 +28,12 @@ def site_info():
         'location': site.location,
         'topic' : 'Personal Biodata',
         'type' : 'CV and Blogging',
-        'robots' : "index, follow"
-        # 'facebook': site.facebook,
-        # 'twitter': site.twitter, 
-        # 'linkedin': site.linkedin,     
-        # 'github': site.github,   
-           
-    } 
-    
+        'robots' : "index, follow"           
+    }     
     return site_info
 
 def header_menu(request):
     from django.urls import reverse   
-    
-    
-    
     menu_items = {}     
     item = {
         'Resume': reverse('bio:cv', kwargs={'looking':request.session['looking_for']}),
@@ -70,7 +61,6 @@ def common_process(request):
             'text': text, 
             'alternat_looking' : alternat_looking,   
             'header_menu' : header_menu(request),
-            'segments' : segments,
-                   
-    }
+            'segments' : segments,                   
+        }
     

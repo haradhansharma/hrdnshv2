@@ -321,7 +321,7 @@ class MyWorks(models.Model):
     
     @property
     def get_image(self):
-        return self.workimage.all()[0]
+        return self.workimage.all()[0] if self.workimage.all() else None
     
     @property
     def get_images(self):
