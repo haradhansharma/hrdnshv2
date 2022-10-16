@@ -21,30 +21,26 @@
                     <h2 class="card-title h5 st-font-size d-block">
                         <a class="link-danger text-decoration-none" href="{{ post.get_absolute_url }}">
                             {{ post.title|upper }}
-                        </a>
-
+                        </a> 
                     </h2>
                     <div class="sense-font-image d-none d-md-block">{{ post.title.0 }}</div>
                 </div>
                 
                 <div class="mb-4">
                     <div class="text-muted">
-                        Published on {{ post.publish.date }} by <strong>{{ post.author.username  }}</strong>
-                        
+                        Published on {{ post.publish.date }} by <strong>{{ post.author.username  }}</strong>                        
                     </div>
-                </div>
-               
+                </div>               
             </div>
         </div>
     </div>
-
 </section>
 
 <section class="pt-6 bg-light o-95">
     <div class="container mt-n10 mt-n11 z-2 ">
         <div class="row justify-content-center align-items-center">
             <div class=" card shadow col-12 p-5 o-90">
-                <div class="col-md-9 mx-auto">
+                <div class="col-12 col-md-9 mx-auto">
                     <div style="position: relative;">
                     <div class="sense-font-image d-none d-md-block">{{ post.title.0 }}</div>
                 </div>
@@ -57,9 +53,9 @@
                     </a> /
                     {% endfor %}
                 </div>
-                    <div class="card border-0   pb-8">   
+                    <div class="card border-0 pb-8">   
                         <div class="card-body p-0">                            
-                            <div class="card-text my-4 " style="font-size: 1.6rem; position:relative;">{{ post.body|safe}}</div>
+                            <div class="card-text my-4 " style="font-size: 1.6rem; position:relative;">{{ post.body|safe }}</div>
                             <div class="text-center pt-5">
                                 <div class="my-3">
                                     <h3>Share Sense To:</h3>
