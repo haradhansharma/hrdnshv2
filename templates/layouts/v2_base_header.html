@@ -17,7 +17,7 @@
                     </li>
                     {% endfor %}
                     <li>
-                        <a href="{% url 'home:elsifightbuilder' %}" target="_blank"
+                        <a href="{% url 'home:elsifightbuilder' %}" target="_blank" rel="nofollow"
                             class="nav-link {% if  request.path == path %} active {% endif %} "> <svg width="20"
                                 height="20" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 243.96 234.86">
@@ -44,6 +44,7 @@
                     <li>
                         <a href="{% if alter %} {{alter}} {% else %} {% url 'home:looking' alternat_looking %} {% endif %}"
                             target="_blank"
+                            rel="dofollow"
                             class="d-md-none nav-link {% if  request.path == path %} active {% endif %} ">Switch to
                             {{alternat_looking|upper}} </a>
                     </li>
