@@ -34,12 +34,12 @@ def looking_for_required(function):
 
 def no_looking_required(function):     
     def wrap(request, *args, **kwargs):       
-        next = request.META.get('HTTP_REFERER', None) 
+        # next = request.META.get('HTTP_REFERER', None) 
         
-        if next:
-            redirect = HttpResponseRedirect(next)
-        else:
-            redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])})) 
+        # if next:
+        #     redirect = HttpResponseRedirect(next)
+        # else:
+        redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])})) 
             
         if request.session['looking_for'] not in looking_list():            
             return function(request, *args, **kwargs)         
