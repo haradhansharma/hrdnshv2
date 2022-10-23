@@ -7,9 +7,9 @@ from .decorators import looking_for_required, no_looking_required, set_looking_f
 from common.common_processor import site_info, common_process
 from django.template.defaultfilters import striptags
 
+from django.views.decorators.csrf import csrf_exempt
 
-
-
+@csrf_exempt
 @no_looking_required
 def home(request):       
     form = LookingForm()  
