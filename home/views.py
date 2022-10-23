@@ -6,10 +6,10 @@ from bio.helper import get_me_data
 from .decorators import looking_for_required, no_looking_required, set_looking_for
 from common.common_processor import site_info, common_process
 from django.template.defaultfilters import striptags
-from django.views.decorators.csrf import requires_csrf_token
 
 
-@requires_csrf_token
+
+
 @no_looking_required
 def home(request):       
     form = LookingForm()  
