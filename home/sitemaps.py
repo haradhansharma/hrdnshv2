@@ -50,7 +50,7 @@ class FirstLookCatSitemap(sitemaps.Sitemap):
     priority = 0.8  
 
     def items(self):
-        return ServiceCategory.objects.all().order_by('-created')
+        return ServiceCategory.objects.all().order_by('-created')[:10]
     
     def lastmod(self, obj):
         return obj.created
@@ -64,7 +64,7 @@ class SecondLookCatSitemap(sitemaps.Sitemap):
     priority = 0.8    
 
     def items(self):
-        return ServiceCategory.objects.all().order_by('-created')
+        return ServiceCategory.objects.all().order_by('-created')[:10]
     
     def lastmod(self, obj):
         return obj.created
@@ -80,7 +80,7 @@ class FirstLookServiceDetails(sitemaps.Sitemap):
     first_look = get_looking(1)  
 
     def items(self):
-        return MyService.objects.filter(me__me_for = self.first_look).order_by('-created')
+        return MyService.objects.filter(me__me_for = self.first_look).order_by('-created')[:10]
     
     def lastmod(self, obj):
         return obj.created
@@ -96,7 +96,7 @@ class SecondLookServiceDetails(sitemaps.Sitemap):
     
 
     def items(self):
-        return MyService.objects.filter(me__me_for = self.first_look).order_by('-created')
+        return MyService.objects.filter(me__me_for = self.first_look).order_by('-created')[:10]
 
     
     def lastmod(self, obj):
@@ -112,7 +112,7 @@ class FirstLookWorkDetails(sitemaps.Sitemap):
     first_look = get_looking(1)  
 
     def items(self):
-        return MyWorks.objects.filter(me__me_for = self.first_look).order_by('-created')
+        return MyWorks.objects.filter(me__me_for = self.first_look).order_by('-created')[:10]
     
     def lastmod(self, obj):
         return obj.created
@@ -128,7 +128,7 @@ class SecondLookWorkDetails(sitemaps.Sitemap):
     
 
     def items(self):
-        return MyWorks.objects.filter(me__me_for = self.first_look).order_by('-created')
+        return MyWorks.objects.filter(me__me_for = self.first_look).order_by('-created')[:10]
 
     
     def lastmod(self, obj):
@@ -143,7 +143,7 @@ class SensesDetailsSitemap(sitemaps.Sitemap):
     priority = 0.8    
 
     def items(self):
-        return SensePost.published.all().order_by('-updated') 
+        return SensePost.published.all().order_by('-updated')[:10]
     
     def lastmod(self, obj):
         return obj.created
@@ -156,7 +156,7 @@ class SensesTagSitemap(sitemaps.Sitemap):
     priority = 0.8    
 
     def items(self):
-        return Tag.objects.all()   
+        return Tag.objects.all()[:10]   
 
         
     def location(self, obj):
