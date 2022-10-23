@@ -9,7 +9,7 @@ from django.template.defaultfilters import striptags
 
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
+
 @no_looking_required
 def home(request):       
     form = LookingForm()  
