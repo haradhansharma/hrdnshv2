@@ -156,7 +156,7 @@ class SensesTagSitemap(sitemaps.Sitemap):
     priority = 0.8    
 
     def items(self):
-        return Tag.objects.all()[:10]   
+        return Tag.objects.all().order_by('id')[:10]
 
         
     def location(self, obj):

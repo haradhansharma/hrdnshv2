@@ -51,7 +51,7 @@ def post_list(request, slug=None):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)  
     
-    tags = Tag.objects.all()    
+    tags = Tag.objects.all().order_by('id') 
     
     if tag:
         taged_text = f'and tagged with {tag.name}'
