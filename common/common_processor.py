@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.urls import reverse
 
 def looking_list():
     look_list = list((dict(settings.LOOKING)).keys())
@@ -14,7 +15,7 @@ def site_info():
     site_info = {
         'name' : site.site.name,
         'domain' : site.site.domain, 
-        'canonical' : site.site.domain,
+        'canonical' : reverse('home:home'),
         'meta_name': site.site_meta,
         'description': site.site_description,
         'tag': site.site_meta_tag,
