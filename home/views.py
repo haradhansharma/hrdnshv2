@@ -6,12 +6,19 @@ from bio.helper import get_me_data
 from .decorators import looking_for_required, no_looking_required, set_looking_for
 from common.common_processor import site_info, common_process
 from django.template.defaultfilters import striptags
+from common.common_processor import looking_list
 
-from django.views.decorators.csrf import csrf_exempt
 
-
-@no_looking_required
-def home(request):       
+def home(request):  
+    
+    redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])}))             
+    if request.session['looking_for'] not in looking_list():            
+        pass      
+    else:
+        return redirect   
+    
+    
+         
     form = LookingForm()  
     if request.method == 'POST':
         form = LookingForm(request.POST)  
