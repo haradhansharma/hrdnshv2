@@ -11,11 +11,11 @@ from common.common_processor import looking_list
 
 def home(request):  
     
-    redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])}))             
-    if request.session['looking_for'] not in looking_list():            
-        pass      
-    else:
-        return redirect   
+    # redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])}))             
+    # if request.session['looking_for'] not in looking_list():            
+    #     pass      
+    # else:
+    #     return redirect   
     
     
          
