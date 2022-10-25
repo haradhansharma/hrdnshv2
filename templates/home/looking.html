@@ -10,11 +10,11 @@
 {% block content %}
 
 {% include "layouts/tophero.html" %}
-<div class="bg-light o-95">
+<div class="bg-light bg-gradient o-95">
     <div class="container py-5 pt-3">
         
         <div class="row justify-content-center">
-            <div class=" text-center mb-5">
+            <div data-aos="zoom-in" data-aos-duration="3000" class=" text-center mb-5">
                 <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">
                     Overview of skills
                 </h3>
@@ -49,7 +49,7 @@
 
             {% for skill in me_data.get_skills %}
             <div class="col-md-6 col-xl-4 d-flex">
-                <div class="card bg-silver py-4 px-5 pt-2 my-3 flex-fill">
+                <div data-aos="zoom-in" data-aos-duration="3000" class="card bg-silver bg-gradient py-4 px-5 pt-2 my-3 flex-fill">
                     <div class="position-absolute top-0 start-50 translate-middle">
                         <img src="{% static site.favicon %}" 
                             class="img-fluid rounded-circle shadow"
@@ -82,20 +82,20 @@
     </div>
 </div>
 {% if me_data.get_certificate %}
-<div class="py-5 bg-dark o-95">
+<div class="py-5 bg-dark bg-gradient o-95">
     <div class="container">        
         <div class="row justify-content-center mb-5">
             <div class=" text-center mb-2">
-                <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">Certificates</h3>
+                <h3 data-aos="fade-up" data-aos-duration="2000" class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">Certificates</h3>
             </div>
 
             <div class="row justify-content-center align-items-center">
                 {% for certificate in me_data.get_certificate %}
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                    <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div data-aos="fade-up" data-aos-duration="2000" class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card bg-white bg-gradient shadow-soft text-primary rounded mb-4">
                         <div class="text-center p-3">
                             <div class="card-container d-block justify-content-center align-items-center col w-100">
-                                <div class="img-card-container img-fluid h-100 bg-light">
+                                <div class="img-card-container img-fluid h-100 bg-light bg-gradient">
                                     <a class="text-decoration-none " 
                                         href="{{ certificate.valid_link }}"
                                         target="_blank">
@@ -123,9 +123,9 @@
 </div>
 {% endif %}
 
-<div class="py-5 bg-silver o-95">
+<div class="py-5 bg-silver bg-gradient o-95">
     <div class="container">
-        <div class="mt-2 text-center">
+        <div data-aos="zoom-in-down" data-aos-duration="2000" class="mt-2 text-center">
             <h3 class="display-5 text-darkbeige fw-bold border-bottom border-3 border-danger">
                 The solutions I provide
             </h3>
@@ -145,7 +145,7 @@
 
         <div class="row justify-content-center">
             {% for service in me_data.get_services %}
-            <div class="col-md-6 col-xl-4 d-flex pt-2 my-3 mb-4">
+            <div data-aos="zoom-in-down" data-aos-duration="2000" class="col-md-6 col-xl-4 d-flex pt-2 my-3 mb-4">
                 <div class="col card shadow-sm flex-fill">
                     <div class="">
                         <a class="overflow-hidden" style="max-height: 180px; min-height: 180px;"
@@ -202,7 +202,7 @@
                             <div class="d-flex justify-content-center align-items-center">
                                 <div class="list-inline-item mb-2">
                                     {% for cat in service.category.all %}
-                                    <a class="badge bg-darkbeige badge-pill text-decoration-none link-light"
+                                    <a class="badge bg-darkbeige bg-gradient badge-pill text-decoration-none link-light"
                                         href="{% url 'bio:view_cat' request.session.looking_for cat.slug %}">#{{cat.name}}
                                     </a>
                                     {% endfor %}
@@ -225,11 +225,11 @@
         </div>
     </div>
 </div>
-<div class="bg-secondary o-95">
+<div class="bg-secondary bg-gradient o-95">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="container">
-                <div class="row justify-content-center mb-5 mb-lg-6">
+                <div data-aos="zoom-in-down" data-aos-duration="2000" class="row justify-content-center mb-5 mb-lg-6">
                     <div class="col-12 text-center mx-auto">
                         <h2 class="h1">My Works</h2>
                         <p class="lead mb-4">You get all Bootstrap components fully customized. Besides, you receive
@@ -239,11 +239,11 @@
                 </div>
                 <div class="row">
                     {% for works in me_data.get_works %}
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                        <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                    <div data-aos="zoom-in-down" data-aos-duration="2000" class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                        <div class="card bg-white bg-gradient shadow-soft text-primary rounded mb-4">
                             <div class="text-center p-3">
                                 <div class="card-container d-block justify-content-center align-items-center col w-100">
-                                    <div class="img-card-container img-fluid h-100 bg-light">
+                                    <div class="img-card-container img-fluid h-100 bg-light bg-gradient">
                                         {% if works.get_image != '' %}
                                         <a class="text-decoration-none "
                                             href="{% url 'bio:work_details' request.session.looking_for works.slug %}">

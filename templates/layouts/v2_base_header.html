@@ -1,7 +1,7 @@
 {% load static %}
 <header class="p-3 bg-light text-primary mb-4 ">
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light border-bottom">
-        <div class="container p-2">
+        <div  class="container p-2">
             <a href="{% url 'home:looking' request.session.looking_for %}">
                 <img src="{% static site.logo %}" height="40" alt="{{ site.name }}">
             </a>

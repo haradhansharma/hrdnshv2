@@ -1,17 +1,17 @@
 {% load static %}
-<div class="bg-myblack p-4 text-light o-95">
+<div class="bg-myblack bg-gradient p-4 text-light o-95">
     <div class="container py-5">
         <div class="row d-xl-flex justify-content-center">
-            <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+            <div data-aos="fade-right" data-aos-duration="3000" class="col-6 col-sm-4 col-md-3 col-xl-2">
                 <img src="{% static me_data.photo.url %}" class="rounded img-thumbnail"  alt="{{me_data.title}}">
             </div>
-            <div class="col-12 col-xl-10 text-center text-xl-start">
+            <div data-aos="fade-down" data-aos-duration="3000" class="col-12 col-xl-10 text-center text-xl-start">
                 <div class="fs-5 text-danger mb-1">Hi, my name is___</div>
                 <h2 class="fs-3 fw-bold m-0 ">{{me_data.title|upper}}</h2>
                 <div class="fs-6 text-brightbeige mt-2">{{me_data.summary|safe}}</div>
-                <div class="mt-2">
+                <div  data-aos="fade-left" data-aos-duration="3000" class="mt-2">
                     {% for link in me_data.get_links %}
-                    <a class="btn btn-secondary btn-sm mb-1" target="_blank" rel="dofollow" href="{{link.links}}"><span>{{link.icon|safe}}</span></a>
+                    <a class="btn btn-secondary bg-gradient btn-sm mb-1" target="_blank" rel="dofollow" href="{{link.links}}"><span>{{link.icon|safe}}</span></a>
                     {% endfor %}
                 </div>
             </div>

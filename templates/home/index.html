@@ -4,29 +4,29 @@
 
 {% block content %}
 
-<div class="position-absolute top-30 start-0">
+<div data-aos="fade-right" data-aos-duration="2000" class="position-absolute top-30 start-0">
     <h2 class="text-end"> 
-        <span class="badge bg-darkbeige">
+        <span class="badge bg-darkbeige bg-gradient">
             Professional Service Provider
         </span>
     </h2>
 </div>
 
-<div class="position-absolute bottom-25 end-0">
+<div data-aos="fade-left" data-aos-duration="2000" class="position-absolute bottom-25 end-0">
     <h2 class="text-end"> 
-        <span class="badge bg-danger">
+        <span class="badge bg-danger bg-gradient">
             Web Developper(Python, Opencart)
         </span>
     </h2>
     <h2 class="text-end">
-        <span class="badge bg-brightbeige">
+        <span class="badge bg-brightbeige bg-gradient">
             Fashion Technologist
         </span>
     </h2>
 </div>
 
 {% if messages %} 
-<div class="row align-items-center justify-content-center">
+<div data-aos="zoom-in" class="row align-items-center justify-content-center">
     <div class="col-12 col-lg-6 text-center">
         <div class="alert alert-danger shadow-soft" role="alert">
             {% for message in messages %}
@@ -38,7 +38,7 @@
 {% endif %}
 
 <div class="row align-items-center justify-content-center">
-    <div class="col-md-6 mb-3">
+    <div data-aos="zoom-in" data-aos-duration="2000" class="col-md-6 mb-3">
         <form method="post" id="looking_form" action="">
             {% csrf_token %}
             <div class="form-check d-flex ps-0">
