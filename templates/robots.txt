@@ -1,4 +1,5 @@
 
+User-agent: *
 
 
 Disallow: /admin/
@@ -9,19 +10,7 @@ Disallow: /nzihomtahj
 Disallow: /bnhnaqixfo
 Disallow: /private/
 Disallow: /junk/
-
-
-User-agent: AdsBot-Google
-User-Agent: Googlebot
-User-Agent: Bingbot
-User-Agent: Slurp
-User-Agent: Googlebot-Image
-User-agent: TruliaBot
-User-agent: Mediapartners-Google
-User-agent: googlebot-news
-Disallow: /
 Disallow: /static/
-
 Disallow: /private/
 Disallow: /junk/
 Disallow: /admin/
