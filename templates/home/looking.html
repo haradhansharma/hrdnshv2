@@ -30,12 +30,14 @@
                     </p>
                     {% endif %}
                     {% if request.session.looking_for == 'fashion' %}
+                    <p class="lead mb-4 text-start">
 
                     Over twenty years of exploring the apparel industry has given me practical experience in various departments such as knit dyeing, 
                     knitting, dyeing, planning and coordination, cutting, sewing, finishing, merchandising, and sampling. My eagerness to learn has led me to adopt a 
                     commercial mindset and focus on 3D technology to achieve new milestones. This has led to expertise in technical fashion design, business forecasting, 
                     supply chain management, operations, and the use of helpful programs like Photoshop and Illustrator. For further details, please refer to <a class="text-decoration-none" href="{% url 'bio:cv' request.session.looking_for %}">my online résumé</a>.
 
+                    </p>
 
                     
                     {% endif %}
