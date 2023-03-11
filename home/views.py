@@ -7,13 +7,15 @@ from .decorators import looking_for_required, no_looking_required, set_looking_f
 from common.common_processor import site_info, common_process
 from django.template.defaultfilters import striptags
 from common.common_processor import looking_list
+from django.contrib import messages
 
 
 def home(request):  
+    looking_for = request.session.get('looking_for')
     
-    redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(request.session['looking_for'])}))             
+    redirect = HttpResponseRedirect(reverse('home:looking', kwargs={'looking': str(looking_for)}))             
     if request.session['looking_for'] not in looking_list():            
-        pass      
+        pass
     else:
         return redirect   
     
@@ -38,14 +40,19 @@ def home(request):
     return render(request, 'home/index.html', context = context)
 
 @set_looking_for
+@looking_for_required
 def looking(request, **kwargs): 
     looking = kwargs['looking']
+    
+    # if looking == 'None':
+    #     messages.warning(request,f'Please choose the area from below...')            
+    #     return HttpResponseRedirect('/')
      
     me_data = get_me_data(request)     
         
     seo_info = site_info() 
     modify = {
-        'canonical' : request.build_absolute_uri(reverse('home:looking', args=[str(looking)])),        
+        'canonical' : request.build_absolute_uri(request.path),        
         'slogan' : f'Overview about me related to {looking} sector',
         'description' : f'{striptags(me_data.summary)[:160]}...',
         'topic' : f'{looking} overview ',

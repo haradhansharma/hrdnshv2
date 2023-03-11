@@ -24,6 +24,7 @@ def get_verbose_name(instance, field_name):
 
 
 @set_looking_for
+@looking_for_required
 def view_cat(request, **kwargs): 
     
     slug = kwargs['slug']
@@ -126,6 +127,7 @@ def compile(ls):
     return dx
 
 @set_looking_for
+@looking_for_required
 def service_details(request, **kwargs):
     slug = kwargs['slug']
     looking = kwargs['looking']
@@ -159,6 +161,7 @@ def service_details(request, **kwargs):
 
 
 @set_looking_for
+@looking_for_required
 def work_details(request, **kwargs):
     slug = kwargs['slug']
     looking = kwargs['looking']
@@ -188,14 +191,17 @@ def work_details(request, **kwargs):
 
 
 @set_looking_for
+@looking_for_required
 def cv(request, **kwargs):
 
     looking = kwargs['looking']
+
+ 
     me_data = get_me_data(request)
     
     seo_info = site_info() 
     modify = {
-        'canonical' : request.build_absolute_uri(reverse('bio:cv', args=[str(looking)])),        
+        'canonical' : request.build_absolute_uri(request.path),        
         'slogan' : f'My HTML CV of {looking} sector',
         'description' : f'{striptags(me_data.summary)[:160]}...',
         'topic' : f'{looking} HTML CV ',
@@ -248,6 +254,7 @@ def render_html(request, **kwargs):
         return html
 
 @set_looking_for
+@looking_for_required
 def cvpdf(request, **kwargs):
     site = site_info()
     site_email = site.get('email')

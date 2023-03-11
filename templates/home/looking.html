@@ -22,29 +22,22 @@
                     {% if request.session.looking_for == 'web' %}
                     <p class="lead mb-4 text-start">
 
-                        As a developer on the Drupal platform, I started my ever-pleasant ten-year journey. 
-                        After that, I became a fan of Opencart. Then <span class="fw-bold text-danger">Python and Django</span> captured my attention completely. 
-                        Below is a brief summary of this journaling. This covers my areas of expertise as well as the equipment I employ. 
-                        If you'd want to learn more, kindly follow the link to <a class="text-decoration-none" href="{% url 'bio:cv' request.session.looking_for %}">my online resume</a> .
-                        
+                        My journey began as a Drupal developer, and over the last ten years, I have gained valuable experience in website development. 
+                        I later developed a keen interest in OpenCart and eventually transitioned to using <span class="fw-bold text-danger">Python and Django</span>, which have now become my primary tools. 
+                        My areas of expertise include web development and design, and I am always keen to learn new skills to stay ahead of industry trends. If you're interested 
+                        in learning more about my experience, please refer to <a class="text-decoration-none" href="{% url 'bio:cv' request.session.looking_for %}">my online resume</a> through the link provided.
                        
                     </p>
                     {% endif %}
                     {% if request.session.looking_for == 'fashion' %}
-                    <p class="lead mb-4 text-start">What I have learned as a result of wandering the apparel sector for more than
-                        twenty years is practical. Although I began my career in the textile industry with knit dyeing,
-                        I had fantastic explorations into knitting, dyeing, planning and coordination, cutting, sewing,
-                        finishing, merchandising, and sampling.
-                    </p>
-                    <p class="lead text-start">
 
-                        I appreciate continuously learning new things. As I advanced in my work, 
-                        I adopted a commercial mindset and realized that 3D technology will bring in new milestones. 
-                        I started practicing technical fashion design, business forecasting, the buy-and-sell supply chain, operations, etc. as a result. 
-                        Numerous helpful programs, such Photoshop and Illustrator, were already at my disposal. Please take a look at my online <a class="text-decoration-none" href="{% url 'bio:cv' request.session.looking_for %}">résumé</a> for further details.
+                    Over twenty years of exploring the apparel industry has given me practical experience in various departments such as knit dyeing, 
+                    knitting, dyeing, planning and coordination, cutting, sewing, finishing, merchandising, and sampling. My eagerness to learn has led me to adopt a 
+                    commercial mindset and focus on 3D technology to achieve new milestones. This has led to expertise in technical fashion design, business forecasting, 
+                    supply chain management, operations, and the use of helpful programs like Photoshop and Illustrator. For further details, please refer to <a class="text-decoration-none" href="{% url 'bio:cv' request.session.looking_for %}">my online résumé</a>.
 
 
-                    </p>
+                    
                     {% endif %}
                 </div>
             </div>
