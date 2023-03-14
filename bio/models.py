@@ -339,6 +339,9 @@ class WorkExperience(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, null=True, blank=True) 
     
+    
+    techn_used = models.ManyToManyField(SkillsIn, related_name='skillsinex')
+    
     @property
     def technology_used(self):
         skills = self.related_work.skills_involved.all()   
