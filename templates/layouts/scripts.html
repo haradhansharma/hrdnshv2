@@ -2,7 +2,8 @@
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 
-
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script>
     document.body.addEventListener('htmx:configRequest', (e) => {
       e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
