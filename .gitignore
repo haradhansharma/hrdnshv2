@@ -1,7 +1,7 @@
 *.pyc  
 *~  
 __pycache__  
-env
+venv
 .vscode
 .DS_Store  
 haradhan/settings.py

@@ -2,6 +2,14 @@
 {% load static %}
 {% load custom_tags %}
 
+
+
+  {% block stylesheets %}
+  <link href="{% static 'ckeditor/ckeditor/contents.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css' %}" />
+  <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+  {% endblock stylesheets %}
+
 {% block title %}{{site.slogan}}{% endblock %}
 {% block content %}
 {% include "layouts/topherocv.html" %}
