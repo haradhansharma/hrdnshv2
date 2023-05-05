@@ -16,3 +16,15 @@
   }
   
 
+
+
+/* Override Bootstrap styles */
+pre {  
+  background: black;
+  padding: 15px;
+}
+code.language-python {
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+
+}
