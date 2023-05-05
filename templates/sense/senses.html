@@ -90,7 +90,7 @@
                                 </div>
 
                             </div>
-                            <div class="card-text my-4 " style="font-size: 1.6rem; position:relative;">{{ post.body|safe|truncatechars:500 }}</div>
+                            <div class="card-text my-4 " style="font-size: 1.6rem; position:relative;">{{ post.body|striptags|safe|truncatechars:500 }}</div>
                             
                             
                         </div>

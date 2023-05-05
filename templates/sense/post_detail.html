@@ -104,15 +104,15 @@
                     <div class="col d-flex">
                         <div class="card bg-lgreen shadow-sm flex-fill overflow-hidden">
                             {% if  sense.image %}
-                            <img src="{% static blog.image.url %}" class="img-fluid" alt="{{sense.title}}">
+                            <img src="{% static blog.image.url %}" class="img-fluid" alt="{{sense.title|striptags }}">
                             {% else %}
                             {% endif %}
                             <div class="card-title px-2 mb-0 border-bottom py-2">
-                                {{sense.title|upper}}
+                                {{sense.title|striptags|upper}}
                                 <div class="sense-font-image d-none d-md-block" style="left: -0.5rem;">{{ sense.title.0 }}</div>
                             </div>
                             <div class="card-body pt-0">
-                                {{sense.body|safe|truncatechars:150}}
+                                {{sense.body|striptags|safe|truncatechars:150}}
                                 <div class="d-sm-flex d-block justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a class="btn btn-sm btn-outline-primary" href="{{sense.get_absolute_url}}">Read On</a>
