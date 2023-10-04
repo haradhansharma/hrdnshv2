@@ -1,0 +1,94 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+  {% block stylesheets %}
+
+
+
+  {% endblock stylesheets %}
+
+{% block title %}{{site.slogan}}{% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white o-95">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <h1 class="mb-4">Latest Senses</h1>                
+                
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="alert alert-secondary mt-5 text-center" role="alert">
+            {% for message in messages %}
+            <span class="alert-inner--text ">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+
+
+</section>
+
+<section class="pt-6 bg-light o-95">
+    <div class="container mt-n10 mt-n11 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5 o-90">
+                <div class="row">   
+                         
+                <div class="col-md-8 col-lg-9 mx-auto">
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+                        {% for form in formset %}                     
+                            {{form}}
+                        {% endfor %}
+                        <div class="btn btn-group">
+                            <a href="{% url 'literature:generate_story_title_and_outline' story_raw.pk %}" class="btn btn-warning btn-block">Back to Config</a>  
+                            <a href="{% url 'literature:story_outline' story_raw.pk %}" class="btn btn-light btn-block">Back to Outline</a>  
+                            <input class="btn btn-success" type="submit" value="Save">
+                        </div>
+                    </form>
+
+
+                
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+
+<script>
+    $(document).ready(function() {
+        // Function to adjust the number of rows for Textarea fields
+        function adjustTextareaRows() {
+            $('textarea').each(function() {
+                var textarea = $(this);
+                var lineHeight = parseInt(textarea.css('line-height'));
+                var currentRows = textarea.prop('rows');
+                var newRows = Math.ceil(textarea[0].scrollHeight / lineHeight);
+                if (newRows !== currentRows) {
+                    textarea.prop('rows', newRows);
+                }
+            });
+        }
+    
+        // Call the function on document ready and when the window is resized
+        adjustTextareaRows();
+        $(window).resize(adjustTextareaRows);
+    });
+    </script>
+
+{% endblock javascripts %}

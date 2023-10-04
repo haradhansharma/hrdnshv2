@@ -1,0 +1,118 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+  {% block stylesheets %}
+
+
+
+  {% endblock stylesheets %}
+
+{% block title %}{{site.slogan}}{% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white o-95">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <h1 class="mb-4">We are writing {{story_raw.title}} || {{story_raw.genre}} || {{story_raw.type}} </h1>                
+               
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="alert alert-secondary mt-5 text-center" role="alert">
+            {% for message in messages %}
+            <span class="alert-inner--text ">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+
+
+</section>
+
+<section class="pt-6 bg-light o-95">
+    <div class="container mt-n10 mt-n11 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5 o-90">
+                <div class="row">   
+                         
+                <div class="col-md-8 col-lg-9 mx-auto">
+                    <form method="POST" action="">
+                            {% csrf_token %}
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                                <div class="mb-2 border-bottom border-2 border-danger py-3">
+                                    {% for field in form %}                                    
+                                            <div class="form-group">
+                                                <!-- Label without colon -->  
+                                                {% if not field.is_hidden %}    
+                                                    <label for="{{ field.id_for_label }}" class="h4">{{ field.label }}</label>   
+                                                {% endif %}                                
+                                                <!-- Form field -->
+                                                {{ field }}
+                                                <!-- Help text -->
+                                                <div>
+                                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                                </div>
+                                            </div>      
+                                            {% for error in field.errors %}
+                                                <div class="text-danger">{{ error }}</div>
+                                            {% endfor %}
+                                        
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            <div class="btn-group">
+                                <a href="{% url 'literature:generate_story_title_and_outline' story_raw.pk %}" class="btn btn-warning btn-block">Back To Configuration</a> 
+                                {% if not story_raw.has_story %} 
+                                <input type="submit" id="outline_form"  name="save_and_stay"  class="btn btn-dark btn-block" value = "Save And Stay"/>
+
+                                <input type="submit" id="outline_form"  name="regenarate_story"  class="btn btn-success btn-block" value = "Genarate Story"/>
+
+                                {% endif %}
+                                {% if story_raw.has_story %}
+                                <input type="submit" id="regenarate" name="regenarate_story" class="btn btn-danger btn-block" value = "Re Genarate Story"/>
+                                <a href="{% url 'literature:story' story_raw.pk %}" class="btn btn-warning btn-block">Go To Story</a>  
+                                {% endif %}
+
+                            </div>                            
+                        </form>
+                
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function() {
+        // Function to adjust the number of rows for Textarea fields
+        function adjustTextareaRows() {
+            $('textarea').each(function() {
+                var textarea = $(this);
+                var lineHeight = parseInt(textarea.css('line-height'));
+                var currentRows = textarea.prop('rows');
+                var newRows = Math.ceil(textarea[0].scrollHeight / lineHeight);
+                if (newRows !== currentRows) {
+                    textarea.prop('rows', newRows);
+                }
+            });
+        }
+    
+        // Call the function on document ready and when the window is resized
+        adjustTextareaRows();
+        $(window).resize(adjustTextareaRows);
+    });
+    </script>
+
+{% endblock javascripts %}

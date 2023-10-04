@@ -1,0 +1,101 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+  {% block stylesheets %}
+
+
+
+  {% endblock stylesheets %}
+
+{% block title %}{{site.slogan}}{% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white o-95">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <h1 class="mb-4">Genarate Parameters from Ideas</h1>                
+                
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="alert alert-secondary mt-5 text-center" role="alert">
+            {% for message in messages %}
+            <span class="alert-inner--text ">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    
+
+</section>
+
+
+
+<section class="pt-6 bg-light o-95">
+    <div class="container mt-n10 mt-n11 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5 o-90">
+                <div class="row">
+                    <div class="col-12 mx-auto mb-4">                        
+                        <form method="get" action="" class="row g-1 justify-content-center align-items-center mt-2">       
+                            <div class="input-group mb-3">
+                                <input type="text" name="q" class="form-control" value="{{request.session.q}}" aria-label="Search outlines..." placeholder="Search outlines Will look into idea, title, genre, type" aria-describedby="button-q">
+                                
+                                <button type="submit" id="button-q" class="btn btn-secondary">Search</button>
+                            </div>   
+                            <small>Write minimum 3 charecter. Will look into idea, title, genre, type</small>         
+                        </form> 
+                    </div>
+            
+                    <div class="col-12 mx-auto mt-3 mb-4">
+                        <h3>Starting point of your literature</h3>
+                        <form method="POST" action="">
+                                {% csrf_token %}       
+                                <div class="mb-2">
+                                    {{ form }}
+                                </div>
+                            
+                                <div class="btn-group">
+                                    <input type="submit" id="idea_form"  class="btn btn-success btn-block" value = "Genarate"/>                        
+                                </div>
+                        </form>
+                    </div>  
+                    <div class="col-12 mx-auto mt-3 mb-4">
+                        <h3>Already genareted</h3>
+                        <ul>
+                        {% for story in story_raws %}
+                        <li>
+                            <a href="{{story.get_absolute_url}}">
+                                {{story}}
+                            </a>
+
+                            {% if story.has_outline %}
+                                <span class="badge bg-success">Has Outline</span>
+                            {% endif %}
+                            {% if story.has_story %}
+                                <span class="badge bg-info">Has Story</span>
+                            {% endif %}
+                        </li>
+                        
+                        {% endfor %}
+                        </ul>
+                    </div>           
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+
+{% endblock javascripts %}

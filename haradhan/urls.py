@@ -26,4 +26,8 @@ urlpatterns = [
     path('', include('common.urls')), 
     path('', include('bio.urls')), 
     path('', include('sense.urls')), 
+    path('lt/', include('literature.urls')), 
+    path('jbfeed/', include('jobfeed.urls')), 
+    
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

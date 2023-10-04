@@ -1,8 +1,20 @@
 # Funtion protector to access by reprot creator only.
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.urls import resolve, reverse
 from django.contrib import messages
 from common.common_processor import looking_list
+
+def superuser_required(view_func):
+    """
+    Decorator to ensure that the user is a superuser.
+    """
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_superuser:
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden("You are not authorized to access this page.")
+
+    return _wrapped_view
 
 def set_looking_for(function):
     

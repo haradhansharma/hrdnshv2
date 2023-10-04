@@ -1,0 +1,114 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+  {% block stylesheets %}
+
+
+
+  {% endblock stylesheets %}
+
+{% block title %}{{site.slogan}}{% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white o-95">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <h1 class="mb-4">Latest Senses</h1>                
+                {% if tag %}
+                <h2 class="mb-4 text-secondary text-center p-2 ">Sences tagged  with "{{ tag.name }}"</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="pt-6 bg-light o-95">
+    <div class="container mt-n10 mt-n11 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5 o-90">
+                <div class="row">
+                <div class="col-md-4 col-lg-3 ">
+                    <nav class="navbar navbar-expand-md navbar-light border-bottom">
+                    <div class="w-100" > 
+                        <button class="w-100 navbar-toggler mb-3 bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#tagCollapse"
+                            aria-controls="tagCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="tagCollapse">                            
+                            <ul class="navbar-nav nav-pills flex-column mb-2 mb-md-0 w-100">
+                                {% for tag in tags %}
+                                <li>
+                                    <a href="{% url 'sense:sense_tag' tag.slug %}" class="nav-link link-danger fw-bold ps-0 {% if tag.slug in segments %} ps-2 bg-danger text-white active {% endif %}">
+                                    #{{tag.name|upper}}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                      </div>
+                    </nav>
+                    <form method="get" action="" class="row g-1 justify-content-center align-items-center text-center mt-2">       
+                        <div class="input-group mb-3">
+                            <input type="text" name="q" class="form-control" value="{{request.session.q}}" aria-label="Search senses..." placeholder="Search senses..." aria-describedby="button-q">
+                            <button type="submit" id="button-q" class="btn btn-secondary">Search</button>
+                        </div>            
+                    </form> 
+                </div>
+      
+                {% if data %}
+                <div class="col-md-8 col-lg-9 mx-auto">
+                    {% for post in data %}
+                    <div class="card border-0  pb-3">
+                        <div class="d-block" style="position: relative;">
+                            <h5 class="card-title h5  d-block">
+                                <a class="link-danger text-decoration-none" target="_blank" href="{{ post.link }}">
+                                    {{ post.title|upper|safe }}
+                                </a>
+
+                            </h5>
+                        </div>
+
+                        <div class="card-body p-0 pb-2">
+                            <div class="justify-content-between border-top border-bottom border-2 border-danger pt-2">
+                                <div class="mb-2">
+                                    <div class="text-muted">
+                                        Published on {{ post.published_parsed }}
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-text" style="font-size: 0.9rem; position:relative;">{{ post.summary|safe}}</div>
+                            
+                            
+                        </div>
+                      
+                    </div>
+
+                    {% endfor %}
+                    {% include "layouts/pagination.html" with page=posts %}
+                </div>
+                {% else %}
+                <div class="col-md-8 col-lg-9 mx-auto">
+                    <div class="alert alert-primary" role="alert">No Senses Found!</div>
+                </div>
+                {% endif %}
+            </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+
+
+{% endblock javascripts %}

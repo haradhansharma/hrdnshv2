@@ -39,7 +39,13 @@ def header_menu(request):
     item = {
         'Resume': reverse('bio:cv', kwargs={'looking':request.session['looking_for']}),
         'Senses': reverse('sense:sense_list'),
+        
+        
     }
+    if request.user.is_superuser:
+        item.update({'JobFeed': reverse('jobfeed:home')})
+        item.update({'Literature': reverse('literature:home')})
+        
     menu_items.update(item)
     
     return menu_items   

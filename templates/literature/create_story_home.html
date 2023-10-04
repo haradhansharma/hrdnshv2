@@ -1,0 +1,114 @@
+{% extends "layouts/v2_base.html" %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+  {% block stylesheets %}
+
+
+
+  {% endblock stylesheets %}
+
+{% block title %}{{site.slogan}}{% endblock %}
+{% block content %}
+{% include "layouts/topherocv.html" %}
+<section class="pb-6 pb-lg-8 bg-dark text-white o-95">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center text-danger my-4">
+                <h1 class="mb-4">We are writing {{story_raw_obj.title}} || {{story_raw_obj.genre}} || {{story_raw_obj.type}} </h1>                
+                
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+</section>
+
+<section class="pt-6 bg-light o-95">
+    <div class="container mt-n10 mt-n11 z-2">
+        <div class="row justify-content-center align-items-center">
+            <div class=" card shadow col-12 p-5 o-90">
+
+                <div class="d-flex justify-content-between mb-2">                    
+                    <div>
+                        <div class="h4">Below are the idea was inputed</div>
+                        <small>If you want to recreate configuration then please delete this and write again.</small>
+                    </div>    
+                    <div>
+                    <a href="{% url 'literature:delete_idea' story_raw_obj.pk %}" class="btn btn-danger">Delete Idea</a>   </br>
+                    <small>It will remove all genarated data and non recorable</small>
+                    </div>             
+                </div>
+
+                <div class="alert alert-dark">
+                    {{story_raw_obj.idea.idea|linebreaksbr}}
+                </div>
+
+
+                
+                
+
+                <div class="alert alert-primary">
+                    Below configurationd data genarated by system and probably it has benn placed in the configuration interface below. You can modify as you wise.
+                </div>
+
+                
+
+                <div class="alert alert-dark">
+                    {% for key, value in idea_res.items %}
+                    <b>{{ key }}</b> : {{value}} </br>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex justify-content-between">                    
+                    <h2>Configuration</h2>                    
+                </div>
+                <div>
+                    <small>Based on the configuration below, an outline of the literature will be created. A perfect configuration can provide you with a flawless outline for writing a portion of literature.</small>
+                </div>
+
+                <form class="row justify-content-center" method="POST" action="">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="col-md-6 col-xl-4 d-flex">
+                            <div class="card bg-silver bg-gradient my-2 p-2 flex-fill" >
+                                {{ field.errors }}
+                                {{ field.label_tag }} {{ field }}
+                                {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="btn-group">
+                    
+                    {% if story_raw_obj.has_outline %}
+                        <a href="{% url 'literature:story_outline' story_raw_id %}" class="btn btn-warning btn-block">Go To Outline</a>  
+                        <input type="submit" id="raw_form" name="regenarate_outline"  class="btn btn-danger btn-block" value = "Re Generate Outline"/> 
+                    {% elif not story_raw_obj.has_outline  %} 
+                        <input type="submit" id="raw_form" name="modify_and_stay" class="btn btn-warning btn-block" value = "Modify And Stay"/> 
+                        <input type="submit" id="raw_form" name="genarate_outline" class="btn btn-success btn-block" value = "Generate Outline"/> 
+                    {% endif %}
+                    {% if story_raw_obj.has_story  %}  
+                        <a href="{% url 'literature:story' story_raw_id %}" class="btn btn-warning btn-block">Go To Story</a>  
+                    {% endif %}
+                    </div>
+
+                </form>
+                <div><small>If you wish to make any changes to the configuration, it is recommended to do so before generating the outline by clicking the "Modify and Stay" button. Once the outline is generated, you will need to regenerate it if you make any changes. </small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+
+
+{% endblock javascripts %}
